@@ -1,9 +1,31 @@
-import React from 'react';
+import React from "react";
+import { StrictMode } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Toaster } from "react-hot-toast";
+import store, { persistor } from "./features/store/store";
+import SocketProvider from "./context/SocketProvider";
+import MainRouter from "./routes/MainRouter";
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
     <>
-      
+      <StrictMode>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+              <BrowserRouter>
+                <SocketProvider>
+                  <MainRouter />
+                </SocketProvider>
+              </BrowserRouter>
+            </GoogleOAuthProvider>
+            <Toaster />
+          </PersistGate>
+        </Provider>
+      </StrictMode>
     </>
   );
 };

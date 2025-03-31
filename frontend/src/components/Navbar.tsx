@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-white font-bold text-xl ml-10">
-                   HEALTH MATE
+                   HEALTH CARE
             </Link>
           </div>
           {/* Hamburger Icon */}
