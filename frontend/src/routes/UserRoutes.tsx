@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import CommonLayout from "../components/users/CommonLayout";
 import { UserProtectedRoute } from "./ProtectedRoutes";
+import { UserPublicRoute } from "./PublicRoutes";
 
 const Register = lazy(() => import("../pages/users/Register"));
 const Login = lazy(() => import("../pages/users/Login"));
@@ -12,7 +13,7 @@ const UserRoutes: React.FC = () => {
     <>
       <Routes>
         {/* Public Routes */}
-        <Route element={<PublicRouteUser />}>
+        <Route element={<UserPublicRoute />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Route>

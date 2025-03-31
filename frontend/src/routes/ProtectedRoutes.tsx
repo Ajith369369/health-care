@@ -6,7 +6,7 @@ import ZegoCloud from "../utils/zegoCloud";
 export const UserProtectedRoute: React.FC = () => {
   const { isAuthenticated, role } = useAppSelector((state) => state.UserSlice);
   return isAuthenticated && role === "user" ? (
-    //@ts-ignore
+    // @ts-expect-error
     <ZegoCloud>
       <Outlet />
     </ZegoCloud>
