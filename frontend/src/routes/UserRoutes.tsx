@@ -1,12 +1,11 @@
-import React from "react";
-import { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import CommonLayout from "../components/users/CommonLayout";
 import { UserProtectedRoute } from "./ProtectedRoutes";
-import CommonLayout from "../components/user/commonLayout";
 
-const Register = lazy(() => import("../pages/user/Register"));
-const Login = lazy(() => import("../pages/user/Login"));
-const ProfileUser = lazy(() => import("../pages/user/Profile"));
+const Register = lazy(() => import("../pages/users/Register"));
+const Login = lazy(() => import("../pages/users/Login"));
+const ProfileUser = lazy(() => import("../pages/users/Profile"));
 
 const UserRoutes: React.FC = () => {
   return (
