@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App:React.FC = () => {
+const Banner:React.FC = () => {
   return (
     <>
       
@@ -8,4 +8,4 @@ const App:React.FC = () => {
   );
 };
 
-export default App;
+export default Banner;

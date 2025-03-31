@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App:React.FC = () => {
+const Body:React.FC = () => {
   return (
     <>
       
@@ -8,4 +8,5 @@ const App:React.FC = () => {
   );
 };
 
-export default App;
+export default Body;
+
