@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "../features/store/store";
-import ZegoCloud from "../utils/zegoCloud";
+import ZegoCloud from "../utils/ZegoCloud";
 
 export const UserProtectedRoute: React.FC = () => {
   const { isAuthenticated, role } = useAppSelector((state) => state.UserSlice);

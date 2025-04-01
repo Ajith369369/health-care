@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../features/store/rootReducer.ts";
-import showToast from "../utils/toast";
+import showToast from "../utils/toast.ts";
 import { clearUser } from "../features/users/UserSlice";
 import { FiMenu, FiX } from "react-icons/fi";
 

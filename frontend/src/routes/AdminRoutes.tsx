@@ -1,16 +1,25 @@
-import React from 'react';
-import { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
-import { PublicRouteAdmin, AdminProtectedRoute } from "./ProtectedRoutes";
+import React, { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import { AdminProtectedRoute } from "./ProtectedRoutes";
+import { AdminPublicRoute } from "./PublicRoutes";
 
-const AdminLogin = lazy(() => import("../pages/admin/AdminLogin"));
-const AdminDashboard = lazy(() => import("../pages/admin/AdminDashboard"));
+const Login = lazy(() => import("../pages/admin/Login"));
+const Dashboard = lazy(() => import("../pages/admin/Dashboard"));
 
-
-const AdminRoutes:React.FC = () => {
+const AdminRoutes: React.FC = () => {
   return (
     <>
-      
+      <Routes>
+        {/* Public Admin Routes */}
+        <Route element={<AdminPublicRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
+
+        {/* Protected Admin Routes */}
+        <Route element={<AdminProtectedRoute />}>
+          <Route path="/" element={<Dashboard />} />
+        </Route>
+      </Routes>
     </>
   );
 };

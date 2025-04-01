@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect } from "react";
 import { ZIM } from "zego-zim-web";
 import { useAppSelector } from "../features/store/store";
 
-const zegoCloud: React.FC = ({ children }: { children: ReactNode }) => {
+const ZegoCloud: React.FC = ({ children }: { children: ReactNode }) => {
   const user = useAppSelector((state) => state.UserSlice);
   useEffect(() => {
     const userID = user.id;
@@ -28,4 +28,4 @@ const zegoCloud: React.FC = ({ children }: { children: ReactNode }) => {
   return children;
 };
 
-export default zegoCloud;
+export default ZegoCloud;

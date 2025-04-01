@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import DonutChart from "../../components/admin/Graph/DonutChart";
-import LineGraph from "../../components/admin/Graph/lineChart";
-import AdminHeader from "../../components/admin/Header&Sidebar/Header";
-import AdminSidebar from "../../components/admin/Header&Sidebar/Sidebar";
-import { ADMIN_API } from "../../constants";
+import DonutChart from "../../components/admin/charts/DonutChart";
+import LineGraph from "../../components/admin/charts/LineChart";
+import AdminHeader from "../../components/admin/Header";
+import AdminSidebar from "../../components/admin/Sidebar";
+import { ADMIN_API } from "../../Config";
 import axiosJWT from "../../utils/axiosService";
 
 const Dashboard: React.FC = () => {
