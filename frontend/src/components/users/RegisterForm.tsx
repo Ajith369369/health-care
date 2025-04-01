@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../constants";
 import { setItemToLocalStorage } from "../../utils/Set&Get";
 import showToast from "../../utils/toaster";
-import { validateSignUpUser } from "../../utils/validation";
+import { validateSignUpUser } from "../../utils/validationSignup";
 
 const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
