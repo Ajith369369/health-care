@@ -9,7 +9,7 @@ const CommonLayout: React.FC = () => {
         <main>
           <Outlet />
         </main>
-        <Footer />
+        <Footer style={""} />
       </div>
     </>
   );

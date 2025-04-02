@@ -20,3 +20,7 @@ export interface TimeSlot {
   start: Date;
   end: Date;
 }
+
+export interface FooterProps {
+  style: string;
+}
