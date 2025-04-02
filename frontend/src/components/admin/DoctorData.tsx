@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux"; // Add this import
 import { Link } from "react-router-dom";
 import { ADMIN_API } from "../../Config";
-import useDoctors from "../../hooks/useDoctors";
 import { clearDoctor } from "../../features/doctors/DoctorSlice"; // Add this import
-import { DoctorInterface } from "../../types/doctorInterface";
+import useDoctors from "../../hooks/useDoctors";
+import { DoctorInterface } from "../../interfaces/doctorInterface";
 import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toast";
 

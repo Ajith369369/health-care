@@ -15,3 +15,8 @@ export interface DoctorInterface {
   isBlocked?: boolean;
   certificateImage?: string;
 }
+
+export interface TimeSlot {
+  start: Date;
+  end: Date;
+}
