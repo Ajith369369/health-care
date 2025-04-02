@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaPlus } from "react-icons/fa"; // Import FaPlus for the "Add More" button
 import { ADMIN_API } from "../../Config";
-import { DepartmentInterface } from "../../interfaces/departmentInterface";
+import { DepartmentInterface } from "../../interfaces/department";
 import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toast";
 const DepartmentManagement: React.FC = () => {

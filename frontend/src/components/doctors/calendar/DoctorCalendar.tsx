@@ -10,7 +10,7 @@ import {
   ScheduledSlot,
   SelectedTimeSlots,
   TimeSlot,
-} from "../../../interfaces/doctorCalendarInterface";
+} from "../../../interfaces/doctorCalendar";
 import axiosJWT from "../../../utils/axiosService";
 import showToast from "../../../utils/toast";
 

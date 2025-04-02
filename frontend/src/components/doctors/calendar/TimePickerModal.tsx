@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useState } from "react";
-import { TimeSlot } from "../../../interfaces/doctorInterface";
-import { TimePickerModalProps } from "../../../interfaces/timePickerModalInterface";
+import { TimeSlot } from "../../../interfaces/doctor";
+import { TimePickerModalProps } from "../../../interfaces/timePickerModal";
 
 const TimePickerModal: React.FC<TimePickerModalProps> = ({}) => {
   const [selectedSlots, setSelectedSlots] = useState<TimeSlot[]>([]);

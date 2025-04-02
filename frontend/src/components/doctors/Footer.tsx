@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterProps } from "../../interfaces/doctorInterface";
+import { FooterProps } from "../../interfaces/doctor";
 
 const Footer: React.FC<FooterProps> = ({ style }) => {
   return (

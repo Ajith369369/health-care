@@ -1,6 +1,6 @@
 import React from "react";
 import "react-calendar/dist/Calendar.css";
-import { SmallCalendarProps } from "../../../interfaces/smallCalendarInterface";
+import { SmallCalendarProps } from "../../../interfaces/smallCalendar";
 
 const SmallCalendar: React.FC <SmallCalendarProps>= ({
   selectedStartDate,

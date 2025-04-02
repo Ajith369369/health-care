@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ADMIN_API } from "../../Config";
 import { clearDoctor } from "../../features/doctors/DoctorSlice"; // Add this import
 import useDoctors from "../../hooks/useDoctors";
-import { DoctorInterface } from "../../interfaces/doctorInterface";
+import { DoctorInterface } from "../../interfaces/doctor";
 import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toast";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ADMIN_API } from "../Config";
-import { DoctorInterface } from "../interfaces/doctorInterface";
+import { DoctorInterface } from "../interfaces/doctor";
 import axiosJWT from "../utils/axiosService";
 
 const useDoctors = () => {
