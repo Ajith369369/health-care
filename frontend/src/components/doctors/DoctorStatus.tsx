@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { DOCTOR_API } from "../../Config";
 import {
   DoctorStatusFormData,
-  DoctorStatusModal,
   DoctorStatusParams,
 } from "../../interfaces/doctorStatus";
 import axiosJWT from "../../utils/axiosService";
@@ -27,9 +26,7 @@ const DoctorStatus: React.FC = () => {
     licenseCertificate: "",
   }));
 
-  const [isModalOpen, setIsModalOpen] = useState<DoctorStatusModal>({
-    isModalOpen: false,
-  });
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleReapplyClick = () => {
     setIsModalOpen(true);
@@ -39,14 +36,14 @@ const DoctorStatus: React.FC = () => {
     e.preventDefault();
     try {
       const response = await axiosJWT.put(
-        `${DOCTOR_API}/reapply_verification/${doctorId}`,
+        `${DOCTOR_API}/reapply-verification/${doctorId}`,
         {
           status: "pending",
         }
       );
 
       if (response.status >= 200 && response.status < 300) {
-        showToast("Reapply of verification successfull");
+        showToast("Reapply of verification successful");
         setIsModalOpen(false);
       } else {
         console.error("Failed to update doctor status");
@@ -60,7 +57,7 @@ const DoctorStatus: React.FC = () => {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axiosJWT.get(
-          `${DOCTOR_API}/doctorDetails/${doctorId}`
+          `${DOCTOR_API}/doctor-details/${doctorId}`
         );
         if (response.status >= 200 && response.status < 300) {
           setFormData(response.data.doctor);

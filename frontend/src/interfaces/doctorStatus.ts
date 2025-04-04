@@ -1,4 +1,4 @@
-export type DoctorStatusParams {
+export type DoctorStatusParams = {
   doctorId?: string;
 }
 
@@ -15,8 +15,4 @@ export interface DoctorStatusFormData {
   experience: string;
   age: string;
   licenseCertificate: string;
-}
-
-export interface DoctorStatusModal {
-  isModalOpen: boolean;
 }
