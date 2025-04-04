@@ -7,7 +7,7 @@ import { USER_API } from "../../Config";
 import { generateTimeSlots } from "../../hooks/generateTimeSlots";
 import axiosJWT from "../../utils/axiosService";
 
-const DoctorListing: React.FC = () => {
+const OfflineConsultation: React.FC = () => {
   const [doctors, setDoctors] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchActive, setSearchActive] = useState<boolean>(false);
@@ -25,63 +25,74 @@ const DoctorListing: React.FC = () => {
   >([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(8);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [filtersUsed, setFiltersUsed] = useState<boolean>(false); // New state to track if any filters are used
+  const [totalDoctors, setTotalDoctors] = useState<number>(0);
+  const [filtersUsed, setFiltersUsed] = useState<boolean>(false);
 
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchDoctorDepartments = async () => {
       try {
-        const departmentResponse = await axiosJWT.get(
-          `${USER_API}/departments`
-        );
-        if (departmentResponse.data.success) {
-          const listedDepartments =
-            departmentResponse.data.allDepartment.filter(
-              (department: any) => department.isListed
-            );
+        const response = await axiosJWT.get(`${USER_API}/departments`);
+        if (response.data.success) {
+          const listedDepartments = response.data.allDepartment.filter(
+            (department: any) => department.isListed
+          );
           setDepartments(listedDepartments);
-
-          const departmentNames = listedDepartments.map(
-            (department: any) => department.departmentName
-          );
-
-          const response = await axiosJWT.get(`${USER_API}/doctors`, {
-            params: {
-              searchQuery,
-              department: selectedDepartment,
-              selectedDate: selectedDate ? selectedDate.toISOString() : null,
-              selectedTimeSlot,
-              page: currentPage,
-              limit: itemsPerPage,
-            },
-          });
-
-          const filteredDoctors = response.data.doctors.filter(
-            (doctor: any) =>
-              departmentNames.includes(doctor.department) &&
-              doctor.isApproved === true
-          );
-
-          setDoctors(filteredDoctors);
-          setTotalPages(Math.ceil(filteredDoctors.length / itemsPerPage));
-          setFiltersUsed(
-            // Update the state to indicate filters are being used
-            searchQuery !== "" ||
-              selectedDepartment !== "" ||
-              selectedDate !== null ||
-              selectedTimeSlot !== ""
-          );
         } else {
           throw new Error("Failed to fetch department details");
         }
+      } catch (error) {
+        console.error("Error fetching department details:", error);
+      }
+    };
+
+    fetchDoctorDepartments();
+  }, []);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const departmentNames = departments.map(
+          (department) => department.departmentName
+        );
+
+        const response = await axiosJWT.get(`${USER_API}/doctors`, {
+          params: {
+            searchQuery,
+            department: selectedDepartment,
+            selectedDate: selectedDate ? selectedDate.toISOString() : null,
+            selectedTimeSlot,
+            page: currentPage,
+            limit: itemsPerPage,
+          },
+        });
+
+        const filteredDoctors = response.data.doctors.filter(
+          (doctor: any) =>
+            (doctor.consultationType === "offline" ||
+              doctor.consultationType === "both") &&
+            departmentNames.includes(doctor.department) &&
+            doctor.isApproved === true
+        );
+
+        setDoctors(filteredDoctors);
+        setTotalDoctors(filteredDoctors.length);
+        setFiltersUsed(
+          // Update the state to indicate filters are being used
+          searchQuery !== "" ||
+            selectedDepartment !== "" ||
+            selectedDate !== null ||
+            selectedTimeSlot !== ""
+        );
       } catch (error) {
         console.error("Error fetching doctors:", error);
       }
     };
 
-    fetchDoctors();
+    if (departments.length > 0) {
+      fetchDoctors();
+    }
   }, [
     searchQuery,
     selectedDepartment,
@@ -89,9 +100,8 @@ const DoctorListing: React.FC = () => {
     selectedTimeSlot,
     currentPage,
     itemsPerPage,
+    departments,
   ]);
-
-  console.log(doctors, "kkkkkkkkkkk");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -123,7 +133,7 @@ const DoctorListing: React.FC = () => {
     setSelectedDate(null);
     setSelectedTimeSlot("");
     setCurrentPage(1); // reset to first page
-    setFiltersUsed(false); // Reset the state to indicate no filters are used
+    setFiltersUsed(false);
   };
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -131,10 +141,7 @@ const DoctorListing: React.FC = () => {
   return (
     <>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-center md:text-left">
-          Find a Doctor
-        </h1>
-        {/* Filter Section */}
+        <h1 className="text-3xl font-bold mb-8">Find a Doctor</h1>
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between mb-4">
           {/* Search Input */}
           <div className="relative mb-4 md:mb-0 w-full md:w-1/3">
@@ -217,8 +224,7 @@ const DoctorListing: React.FC = () => {
             </button>
           )}
         </div>
-        {/* Doctor Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {doctors.map((doctor) => (
             <Link key={doctor._id} to={`/user/doctor/${doctor._id}`}>
               <div className="bg-gray-300 shadow-md rounded-lg p-6 cursor-pointer flex flex-col justify-center items-center">
@@ -240,26 +246,27 @@ const DoctorListing: React.FC = () => {
             </Link>
           ))}
         </div>
-        {/* Pagination */}
         <div className="mt-10 flex justify-center">
           <ul className="flex pl-0 list-none rounded my-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <li key={index}>
-                <button
-                  className={`${
-                    currentPage === index + 1
-                      ? "bg-blue-900 text-white"
-                      : "text-blue-900 hover:text-blue-700"
-                  } cursor-pointer px-3 py-2`}
-                  onClick={() => paginate(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
+            {Array.from(
+              { length: Math.ceil(totalDoctors / itemsPerPage) },
+              (_, index) => (
+                <li key={index}>
+                  <button
+                    className={`${
+                      currentPage === index + 1
+                        ? "bg-blue-900 text-white"
+                        : "text-blue-900 hover:text-blue-700"
+                    } cursor-pointer px-3 py-2`}
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              )
+            )}
           </ul>
         </div>
-        {/* Next/Previous Page Buttons */}
         <div className="flex justify-center mt-4">
           {currentPage > 1 && (
             <button
@@ -269,7 +276,7 @@ const DoctorListing: React.FC = () => {
               Previous Page
             </button>
           )}
-          {doctors.length === itemsPerPage && (
+          {doctors.length === itemsPerPage && totalDoctors > itemsPerPage && (
             <button
               className="bg-blue-900 text-white py-2 px-4 rounded ml-4"
               onClick={() => paginate(currentPage + 1)}
@@ -283,4 +290,4 @@ const DoctorListing: React.FC = () => {
   );
 };
 
-export default DoctorListing;
+export default OfflineConsultation;
