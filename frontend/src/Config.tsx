@@ -9,6 +9,7 @@ export const CLOUDINARY_UPLOAD_API: string = import.meta.env.VITE_CLOUDINARY_UPL
 export const CLOUDINARY_UPLOAD_PRESET: string = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 export const ZEGO_SERVER_SECRET: string = import.meta.env.VITE_ZEGO_SERVER_SECRET;
 export const APP_ID: number = Number(import.meta.env.VITE_APP_ID);
+export const STRIPE_PUBLIC_KEY: string = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 export const NAME_REGEX = /^[A-Z][a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 export const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 export const DESCRIPTION_REGEX = /^[A-Z][A-Za-z\s,.-]*$/;

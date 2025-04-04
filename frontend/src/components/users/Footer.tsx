@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
       <footer className="bg-blue-950 text-white py-8 mt-auto w-full">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between">
           <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-2">Health Mate</p>
+            <p className="text-2xl font-bold mb-2">Health Care</p>
             <p className="text-lg mb-4">
               Leading the Way in Medical Excellence, Trusted Care.
             </p>
