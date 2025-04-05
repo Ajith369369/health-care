@@ -2,12 +2,12 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { USER_API } from "../../constants";
-import { setItemToLocalStorage } from "../../utils/Set&Get";
-import showToast from "../../utils/toaster";
-import { validateSignUpUser } from "../../utils/validationSignup";
+import { USER_API } from "../../Config";
+import { setItemToLocalStorage } from "../../utils/set&Get";
+import showToast from "../../utils/toast";
+import validateSignUpUser from "../../utils/validationSignup";
 
-const RegisterForm: React.FC = () => {
+const Register: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ const RegisterForm: React.FC = () => {
       education: "",
       description: "",
       experience: "",
-      lisenceCertificate: null,
+      licenseCertificate: null,
       consultationType: "",
     },
     validate: validateSignUpUser,
@@ -145,4 +145,4 @@ const RegisterForm: React.FC = () => {
   );
 };
 
-export default RegisterForm;
+export default Register;
