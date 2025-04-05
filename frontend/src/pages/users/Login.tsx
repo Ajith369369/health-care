@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import LoginComponent from "../../components/users/Login";
 
-const Login:React.FC = () => {
+const Login: React.FC = () => {
   return (
     <>
-      
+      <LoginComponent />;
     </>
   );
 };

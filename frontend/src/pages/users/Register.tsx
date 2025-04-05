@@ -1,10 +1,10 @@
-import React from 'react';
-import RegisterForm from "../../components/users/Register"; 
+import React from "react";
+import RegisterComponent from "../../components/users/Register";
 
-const Register:React.FC = () => {
+const Register: React.FC = () => {
   return (
     <>
-      <RegisterForm /> 
+      <RegisterComponent />
     </>
   );
 };
