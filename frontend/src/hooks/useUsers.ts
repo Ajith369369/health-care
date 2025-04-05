@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import { ADMIN_API } from "../Config";
-import { DoctorInterface } from "../interfaces/doctor";
+import { UserInterface } from "../types/userInterface";
 import axiosJWT from "../utils/axiosService";
 
-export const useDoctors = () => {
-  const [doctors, setDoctors] = useState<DoctorInterface[]>([]);
+export const useUsers = () => {
+  const [users, setUsers] = useState<UserInterface[]>([]);
 
   useEffect(() => {
     axiosJWT
-      .get(ADMIN_API + "/doctors", {
+      .get(ADMIN_API + "/users", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       })
       .then(({ data }) => {
-        setDoctors(data.doctors);
+        setUsers(data.users);
       })
       .catch((error: any) => console.log(error));
-  }, []);
+  }, [setUsers]);
 
-  return { doctors, setDoctors };
+  return { users, setUsers };
 };
