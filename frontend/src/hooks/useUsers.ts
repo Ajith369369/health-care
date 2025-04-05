@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ADMIN_API } from "../Config";
+import axiosJWT from "../services/axiosService";
 import { UserInterface } from "../types/userInterface";
-import axiosJWT from "../utils/axiosService";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<UserInterface[]>([]);

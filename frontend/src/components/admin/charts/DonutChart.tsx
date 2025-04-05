@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { ADMIN_API } from "../../../Config";
-import axiosJWT from "../../../utils/axiosService";
+import axiosJWT from "../../../services/axiosService";
 
 const DonutChart: React.FC = () => {
   const [doctors, setDoctors] = useState<[]>([]);

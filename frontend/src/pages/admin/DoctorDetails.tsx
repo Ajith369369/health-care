@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../../components/admin/Sidebar";
 import { ADMIN_API } from "../../Config";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 
 const DoctorDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -10,7 +10,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 import { CHAT_API } from "../Config";
 import { useAppSelector } from "../features/store/store";
-import getConversations from "../hooks/getConversations";
+import getConversations from "../services/getConversations";
 import { ChatInterface, MessageInterface } from "../types/chatInterface";
 
 export default function useChats() {

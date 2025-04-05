@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import useHistory hook
 import { ADMIN_API } from "../../Config";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast";
 
 const DoctorVerification: React.FC = () => {

@@ -6,7 +6,7 @@ import { useSocket } from "../../context/SocketContext";
 import { useAppSelector } from "../../features/store/store";
 import Conversation from "../../modules/chat/doctors/Conversation.tsx";
 import Message from "../../modules/chat/doctors/Message";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService.ts";
 
 const Chat: React.FC = () => {
   const doctor = useAppSelector((state) => state.DoctorSlice);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { USER_API } from "../../Config";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 
 const Body: React.FC = () => {
   const [doctors, setDoctors] = useState<any[]>([]);

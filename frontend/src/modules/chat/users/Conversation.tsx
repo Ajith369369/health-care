@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { USER_API } from "../../../Config";
+import axiosJWT from "../../../services/axiosService";
 import { ConversationProps } from "../../../types/userConversationInterface";
-import axiosJWT from "../../../utils/axiosService";
 
 const Conversation: React.FC<ConversationProps> = ({
   conversation,

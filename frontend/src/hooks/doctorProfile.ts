@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { DOCTOR_API, NAME_REGEX, PHONE_REGEX } from "../Config.tsx";
 import { DoctorInterface } from "../interfaces/doctor.ts";
-import axiosJWT from "../utils/axiosService.ts";
-import showToast from "../utils/toast.ts";
+import axiosJWT from "../services/axiosService.ts";
 import {
   uploadCertificateToCloudinary,
   uploadImagesToCloudinary,
-} from "./uploadImages.ts";
+} from "../services/uploadImages.ts";
+import showToast from "../utils/toast.ts";
 
 axios.defaults.withCredentials = true;
 

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { STRIPE_PUBLIC_KEY, USER_API } from "../../Config";
 import { RootState } from "../../features/store/rootReducer";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast";
 
 const AppointmentOnlineBooking: React.FC = () => {

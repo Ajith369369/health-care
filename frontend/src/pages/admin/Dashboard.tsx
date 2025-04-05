@@ -4,7 +4,7 @@ import LineGraph from "../../components/admin/charts/LineChart";
 import AdminHeader from "../../components/admin/Header";
 import AdminSidebar from "../../components/admin/Sidebar";
 import { ADMIN_API } from "../../Config";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 
 const Dashboard: React.FC = () => {
   const [doctors, setDoctors] = useState<[]>([]);

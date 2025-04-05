@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ADMIN_API } from "../../Config";
+import axiosJWT from "../../services/axiosService";
 import { UserInterface } from "../../types/userInterface";
-import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toast";
 
 const UserData: React.FC<UserInterface & { index: number }> = ({

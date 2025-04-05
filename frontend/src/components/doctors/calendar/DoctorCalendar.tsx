@@ -6,13 +6,13 @@ import { RRule } from "rrule";
 import Swal from "sweetalert2";
 import { DOCTOR_API } from "../../../Config";
 import { RootState } from "../../../features/store/rootReducer";
-import { generateTimeSlots } from "../../../hooks/generateTimeSlots";
 import {
   ScheduledSlot,
   SelectedTimeSlots,
   TimeSlot,
 } from "../../../interfaces/doctorCalendar";
-import axiosJWT from "../../../utils/axiosService";
+import axiosJWT from "../../../services/axiosService";
+import { generateTimeSlots } from "../../../utils/generateTimeSlots";
 import showToast from "../../../utils/toast";
 
 const DoctorCalendar: React.FC = () => {

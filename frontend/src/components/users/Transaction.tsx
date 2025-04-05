@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { USER_API } from "../../Config";
 import type { Transaction } from "../../interfaces/transaction.ts";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService.ts";
 import showToast from "../../utils/toast";
 
 const Transaction: React.FC = () => {

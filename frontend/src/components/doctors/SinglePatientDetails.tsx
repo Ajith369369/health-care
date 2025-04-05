@@ -15,7 +15,7 @@ import {
 } from "../../Config";
 import { useAppSelector } from "../../features/store/store";
 import { Medicines } from "../../interfaces/singlePatientDetails";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast";
 
 const SinglePatientDetails: React.FC = () => {

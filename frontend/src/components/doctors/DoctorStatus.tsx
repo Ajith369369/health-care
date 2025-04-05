@@ -5,7 +5,7 @@ import {
   DoctorStatusFormData,
   DoctorStatusParams,
 } from "../../interfaces/doctorStatus";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast";
 
 const DoctorStatus: React.FC = () => {

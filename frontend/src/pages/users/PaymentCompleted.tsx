@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import Navbar from "../../components/users/Navbar";
 import PaymentMessage from "../../components/users/Payment";
 import { USER_API } from "../../Config";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 
 const PaymentCompleted: React.FC = () => {
   const [searchParams] = useSearchParams();

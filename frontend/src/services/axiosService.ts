@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { TOKEN_API } from "../Config";
 import { Payload } from "../types/propsType";
-import logout from "./logout";
+import logout from "../utils/logout";
 
 const axiosJWT = axios.create();
 axiosJWT.defaults.withCredentials = true;

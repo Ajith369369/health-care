@@ -1,9 +1,9 @@
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { NAME_REGEX, PHONE_REGEX, USER_API } from "../Config";
-import { uploadImagesToCloudinary } from "./uploadImages";
+import axiosJWT from "../services/axiosService";
+import { uploadImagesToCloudinary } from "../services/uploadImages";
 import { UserInterface } from "../types/userInterface";
-import axiosJWT from "../utils/axiosService";
 import showToast from "../utils/toast";
 
 axios.defaults.withCredentials = true;

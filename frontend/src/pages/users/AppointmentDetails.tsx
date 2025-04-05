@@ -13,8 +13,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/users/Navbar";
 import { CHAT_API, USER_API, ZEGO_SERVER_SECRET } from "../../Config";
 import { useAppSelector } from "../../features/store/store";
-import { uploadDocumentToCloudinary } from "../../hooks/uploadImages";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
+import { uploadDocumentToCloudinary } from "../../services/uploadImages";
 import showToast from "../../utils/toast";
 
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";

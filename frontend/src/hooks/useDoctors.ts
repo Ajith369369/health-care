@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ADMIN_API } from "../Config";
 import { DoctorInterface } from "../interfaces/doctor";
-import axiosJWT from "../utils/axiosService";
+import axiosJWT from "../services/axiosService";
 
 export const useDoctors = () => {
   const [doctors, setDoctors] = useState<DoctorInterface[]>([]);

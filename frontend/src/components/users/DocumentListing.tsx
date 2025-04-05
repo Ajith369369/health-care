@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineFilePdf } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { USER_API } from "../../Config";
 import { useAppSelector } from "../../features/store/store";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast"; // Assuming you have a toast utility for notifications
 
 const DocumentListing: React.FC = () => {

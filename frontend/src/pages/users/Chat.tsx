@@ -5,7 +5,7 @@ import { CHAT_API, USER_API } from "../../Config";
 import { useAppSelector } from "../../features/store/store";
 import Conversation from "../../modules/chat/users/Conversation";
 import Message from "../../modules/chat/users/Message";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
 
 import { useSocket } from "../../context/SocketContext";
 

@@ -1,15 +1,16 @@
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import React, { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { ZIM } from "zego-zim-web";
+import { ZEGO_SERVER_SECRET } from "../Config";
 import { useAppSelector } from "../features/store/store";
 
-const ZegoCloud: React.FC = ({ children }: { children: ReactNode }) => {
+const ZegoCloud = ({ children }: { children: ReactNode }) => {
   const user = useAppSelector((state) => state.UserSlice);
   useEffect(() => {
     const userID = user.id;
     const userName = user.name;
     const appID = 1631866234;
-    const serverSecret = "ef643f6bf95ef4488775c1cd2d944227";
+    const serverSecret = ZEGO_SERVER_SECRET;
     //@ts-ignore
     const TOKEN = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,

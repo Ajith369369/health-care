@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DOCTOR_API } from "../../Config";
 import { RootState } from "../../features/store/rootReducer";
-import axiosJWT from "../../utils/axiosService";
 import { BookingDetails } from "../../interfaces/appointmentDetails";
+import axiosJWT from "../../services/axiosService";
 
 const AppointmentDetails: React.FC = () => {
   const id = useSelector((state: RootState) => state.DoctorSlice.id);

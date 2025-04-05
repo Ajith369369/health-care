@@ -4,8 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { USER_API } from "../../Config";
-import { generateTimeSlots } from "../../hooks/generateTimeSlots";
-import axiosJWT from "../../utils/axiosService";
+import axiosJWT from "../../services/axiosService";
+import { generateTimeSlots } from "../../utils/generateTimeSlots";
 
 const OnlineConsultation: React.FC = () => {
   const [doctors, setDoctors] = useState<any[]>([]);

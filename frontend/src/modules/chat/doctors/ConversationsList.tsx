@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { USER_API } from "../../../Config";
-import axiosJWT from "../../../utils/axiosService";
+import axiosJWT from "../../../services/axiosService";
 import Conversation from "./Conversation";
 
 const ConversationsList: React.FC = () => {
