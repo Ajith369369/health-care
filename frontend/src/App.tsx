@@ -1,12 +1,11 @@
-import React from "react";
-import { StrictMode } from "react";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import React, { StrictMode } from "react";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import SocketProvider from "./context/SocketContext";
 import store, { persistor } from "./features/store/store";
-import SocketProvider from "./context/SocketProvider";
 import MainRouter from "./routes/MainRouter";
 
 const App: React.FC = () => {
