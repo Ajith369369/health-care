@@ -1,23 +1,42 @@
 import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import CommonLayout from "../components/users/CommonLayout";
-import AppointmentBooking from "../pages/users/AppointmentBooking";
-import AppointmentDetails from "../pages/users/AppointmentDetails";
-import AppointmentListing from "../pages/users/AppointmentListing";
-import AppointmentOnlineBooking from "../pages/users/AppointmentOnlineBooking";
-import Chat from "../pages/users/Chat";
-import DoctorListing from "../pages/users/DoctorListing";
-import DocumentListing from "../pages/users/DocumentListing";
-import LabRecord from "../pages/users/LabRecord";
-import OfflineConsultation from "../pages/users/OfflineConsultation";
-import OnlineConsultation from "../pages/users/OnlineConsultation";
-import PaymentCompleted from "../pages/users/PaymentCompleted";
-import SingleDoctorView from "../pages/users/SingleDoctorView";
-import Wallet from "../pages/users/Wallet";
-import WalletTransaction from "../pages/users/WalletTransaction";
 import { UserProtectedRoute } from "./ProtectedRoutes";
 import { UserPublicRoute } from "./PublicRoutes";
 
+const AboutUs = lazy(() => import("../components/users/AboutUs"));
+const Home = lazy(() => import("../pages/Home"));
+const AppointmentBooking = lazy(
+  () => import("../pages/users/AppointmentBooking")
+);
+const AppointmentDetails = lazy(
+  () => import("../pages/users/AppointmentDetails")
+);
+const AppointmentListing = lazy(
+  () => import("../pages/users/AppointmentListing")
+);
+const AppointmentOnlineBooking = lazy(
+  () => import("../pages/users/AppointmentOnlineBooking")
+);
+const Chat = lazy(() => import("../pages/users/Chat"));
+const DoctorListing = lazy(() => import("../pages/users/DoctorListing"));
+const DocumentListing = lazy(() => import("../pages/users/DocumentListing"));
+const ForgotPassword = lazy(() => import("../pages/users/ForgotPassword"));
+const LabRecord = lazy(() => import("../pages/users/LabRecord"));
+const OfflineConsultation = lazy(
+  () => import("../pages/users/OfflineConsultation")
+);
+const OnlineConsultation = lazy(
+  () => import("../pages/users/OnlineConsultation")
+);
+const PaymentCompleted = lazy(() => import("../pages/users/PaymentCompleted"));
+const ResetPassword = lazy(() => import("../pages/users/ResetPassword"));
+const SingleDoctorView = lazy(() => import("../pages/users/SingleDoctorView"));
+const VerifyOTP = lazy(() => import("../pages/users/VerifyOTP"));
+const Wallet = lazy(() => import("../pages/users/Wallet"));
+const WalletTransaction = lazy(
+  () => import("../pages/users/WalletTransaction")
+);
 const Register = lazy(() => import("../pages/users/Register"));
 const Login = lazy(() => import("../pages/users/Login"));
 const ProfileUser = lazy(() => import("../pages/users/Profile"));
@@ -28,14 +47,21 @@ const UserRoutes: React.FC = () => {
       <Routes>
         {/* Public Routes */}
         <Route element={<UserPublicRoute />}>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route element={<CommonLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+          <Route path="/user/about-us" element={<AboutUs />} />
+          <Route path="/user/register" element={<Register />} />
+          <Route path="/user/verify-otp" element={<VerifyOTP />} />
+          <Route path="/user/login" element={<Login />} />
+          <Route path="/user/forgot-password" element={<ForgotPassword />} />
+          <Route path="/user/reset-password/:id" element={<ResetPassword />} />
         </Route>
 
         {/* Protected Routes */}
         <Route element={<UserProtectedRoute />}>
           <Route element={<CommonLayout />}>
-            <Route path="/profile" element={<ProfileUser />} />
+            <Route path="/user/profile" element={<ProfileUser />} />
             <Route path="/user/doctor" element={<DoctorListing />} />
             <Route path="/user/doctor/:id" element={<SingleDoctorView />} />
             <Route
