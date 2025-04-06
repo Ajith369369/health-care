@@ -127,7 +127,7 @@ const AppointmentBooking: React.FC = () => {
 
         const bookingId = response.data.booking.bookingId;
         Navigate({
-          to: `${USER_API}/payment_status/${bookingId}?success=true`,
+          to: `${USER_API}/payment-status/${bookingId}?success=true`,
         });
       } else {
         showToast(response.data.message, "error");
@@ -153,7 +153,7 @@ const AppointmentBooking: React.FC = () => {
       };
 
       const response = await axiosJWT.post(
-        `${USER_API}/walletPayment`,
+        `${USER_API}/wallet-payment`,
         appointmentData
       );
 
@@ -161,7 +161,7 @@ const AppointmentBooking: React.FC = () => {
         const bookingId = response.data.createBooking._id;
 
         // Update wallet amount before navigating
-        navigate(`/payment_status/${bookingId}?success=true`);
+        navigate(`/payment-status/${bookingId}?success=true`);
       } else {
         showToast(response.data.message, "error");
       }

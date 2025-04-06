@@ -29,7 +29,7 @@ const DoctorVerification: React.FC = () => {
     } else {
       try {
         const response = await axiosJWT.patch(
-          `${ADMIN_API}/verify_doctor/${id}`,
+          `${ADMIN_API}/verify-doctor/${id}`,
           { status }
         );
         showToast(response.data.message, "success");
@@ -43,7 +43,7 @@ const DoctorVerification: React.FC = () => {
   const handleRejectConfirm = async () => {
     try {
       const response = await axiosJWT.patch(
-        `${ADMIN_API}/verify_doctor_rejection/${id}`,
+        `${ADMIN_API}/verify-doctor-rejection/${id}`,
         { status: "rejected", reason: rejectionReason }
       );
       console.log(response.data.message);

@@ -29,7 +29,7 @@ const DoctorData: React.FC = () => {
     setDoctors(newDoctors);
 
     axiosJWT
-      .patch(ADMIN_API + `/block_doctor/${doctor._id}`)
+      .patch(ADMIN_API + `/block-doctor/${doctor._id}`)
       .then((response) => {
         if (response.data.success && !response.data.doctor.isBlocked) {
           showToast(response.data.message);

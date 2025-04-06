@@ -10,7 +10,7 @@ const EmailVerification: React.FC = () => {
   const navigate = useNavigate();
   const verifyEmail = () => {
     axios
-      .post(DOCTOR_API + `/verify_token/${token}`)
+      .post(DOCTOR_API + `/verify-token/${token}`)
       .then(({ data }) => {
         showToast(data.message, "success");
         setIsVerified(true);

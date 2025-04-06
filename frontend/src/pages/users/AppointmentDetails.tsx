@@ -136,7 +136,7 @@ const AppointmentDetails: React.FC = () => {
       appointmentId,
     };
 
-    const response = await axiosJWT.post(`${USER_API}/fetchPrescription`, data);
+    const response = await axiosJWT.post(`${USER_API}/fetch-prescription`, data);
 
     if (response.data && response.data.response) {
       setPrescription(response.data.response);
@@ -187,7 +187,7 @@ const AppointmentDetails: React.FC = () => {
       }
 
       // Send the array of document data to the backend
-      const response = await axiosJWT.post(`${USER_API}/uploadDocuments`, {
+      const response = await axiosJWT.post(`${USER_API}/upload-documents`, {
         id: id,
         documents: documentsData,
       });

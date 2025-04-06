@@ -31,7 +31,7 @@ const Body: React.FC = () => {
                   Schedule Appointment
                 </Link>
                 <Link
-                  to="/doctor/patientList"
+                  to="/doctor/patient-list"
                   className="flex items-center justify-center bg-blue-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
                 >
                   <MdList className="w-6 h-6 mr-2" />

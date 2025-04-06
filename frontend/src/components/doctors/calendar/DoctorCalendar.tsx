@@ -49,7 +49,7 @@ const DoctorCalendar: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosJWT.post(`${DOCTOR_API}/getTimeSlots`, {
+        const response = await axiosJWT.post(`${DOCTOR_API}/get-time-slots`, {
           doctorId: doctor.id,
         });
 
@@ -158,7 +158,7 @@ const DoctorCalendar: React.FC = () => {
         endDate: selectedEndDate,
         slotTime: selectedTimeSlots,
       };
-      const response = await axiosJWT.post(`${DOCTOR_API}/addSlot`, slotsData);
+      const response = await axiosJWT.post(`${DOCTOR_API}/add-slot`, slotsData);
       if (response) {
         showToast("Slots added successfully!", "success");
 
@@ -177,7 +177,7 @@ const DoctorCalendar: React.FC = () => {
 
   const handleDeleteScheduled = async (_id: string) => {
     try {
-      await axiosJWT.delete(`${DOCTOR_API}/deleteSlot/${_id}`);
+      await axiosJWT.delete(`${DOCTOR_API}/delete-slot/${_id}`);
       setScheduledSlots((prev) => prev.filter((slot) => slot._id !== _id));
       Swal.fire("Deleted!", "Your time slot has been deleted.", "success");
     } catch (error) {

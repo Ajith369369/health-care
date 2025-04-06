@@ -122,7 +122,7 @@ const SinglePatientDetails: React.FC = () => {
       prescriptionDate: prescriptionDate,
       medicines: medicines,
     };
-    const response = await axiosJWT.post(`${DOCTOR_API}/addPrescription`, data);
+    const response = await axiosJWT.post(`${DOCTOR_API}/add-prescription`, data);
     if (response) {
       showToast("Prescription added successfully", "success");
     }

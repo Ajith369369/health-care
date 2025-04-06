@@ -17,7 +17,7 @@ const ResetPassword: React.FC = () => {
     validate: validateResetPassword,
     onSubmit: ({ password }) => {
       axios
-        .post(USER_API + `/reset_password/${id}`, { password })
+        .post(USER_API + `/reset-password/${id}`, { password })
         .then(({ data }) => {
           showToast(data.message, "success");
           navigate("/user/login");

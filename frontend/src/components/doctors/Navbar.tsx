@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
               {doctor.isAuthenticated && doctor.role === "doctor" && (
                 <>
                   <Link
-                    to="/doctor/patientList"
+                    to="/doctor/patient-list"
                     className="text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Appointment
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
               {doctor.isAuthenticated && doctor.role === "doctor" && (
                 <>
                   <Link
-                    to="/doctor/patientList"
+                    to="/doctor/patient-list"
                     className="text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Appointment

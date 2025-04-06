@@ -18,7 +18,7 @@ const getAccessToken = async () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const { data } = await axios.get(`${TOKEN_API}/accessToken`, { headers });
+    const { data } = await axios.get(`${TOKEN_API}/access-token`, { headers });
 
     const decodedToken: Payload = await jwtDecode(token);
     const { role } = decodedToken;

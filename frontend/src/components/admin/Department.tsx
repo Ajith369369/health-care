@@ -35,7 +35,7 @@ const DepartmentManagement: React.FC = () => {
 
     try {
       const response = await axiosJWT.patch(
-        `${ADMIN_API}/unlist_department/${id}`
+        `${ADMIN_API}/unlist-department/${id}`
       );
       if (response.data.success) {
         showToast(response.data.message, "success");
@@ -73,7 +73,7 @@ const DepartmentManagement: React.FC = () => {
 
     try {
       const response = await axiosJWT.post(
-        `${ADMIN_API}/addDepartment`,
+        `${ADMIN_API}/add-department`,
         newDepartment
       );
 

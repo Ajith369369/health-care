@@ -48,7 +48,7 @@ const AppointmentList: React.FC = () => {
                     key={appointment._id}
                     className="hover:bg-gray-200 cursor-pointer transition duration-300"
                     onClick={() =>
-                      (window.location.href = `/appointmentDetails/${appointment._id}`)
+                      (window.location.href = `/appointment-details/${appointment._id}`)
                     }
                   >
                     <td className="py-2 px-4 border-b text-center">

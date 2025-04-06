@@ -36,9 +36,9 @@ const Dashboard: React.FC = () => {
 
     const fetchAppointments = async () => {
       try {
-        const response = await axiosJWT.get(`${ADMIN_API}/appoinments`);
-        if (Array.isArray(response.data.appoinments)) {
-          setAppointments(response.data.appoinments);
+        const response = await axiosJWT.get(`${ADMIN_API}/appointments`);
+        if (Array.isArray(response.data.appointments)) {
+          setAppointments(response.data.appointments);
         }
       } catch (error) {
         console.error("Error fetching appointments:", error);

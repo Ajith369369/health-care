@@ -28,7 +28,7 @@ const OTPForm: React.FC = () => {
       const userId = getItemFromLocalStorage("userId");
       if (userId) {
         axios
-          .post(USER_API + "/verify_otp", { otp, userId })
+          .post(USER_API + "/verify-otp", { otp, userId })
           .then(({ data }) => {
             showToast(data.message, "success");
             removeItemFromLocalStorage("userId");
@@ -59,7 +59,7 @@ const OTPForm: React.FC = () => {
     const userId = getItemFromLocalStorage("userId");
     if (userId) {
       axios
-        .post(USER_API + "/resend_otp", { userId })
+        .post(USER_API + "/resend-otp", { userId })
         .then(({ data }) => {
           showToast(data.message, "success");
         })

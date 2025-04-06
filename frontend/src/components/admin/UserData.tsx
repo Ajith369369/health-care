@@ -16,7 +16,7 @@ const UserData: React.FC<UserInterface & { index: number }> = ({
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     axiosJWT
-      .patch(ADMIN_API + `/block_user/${_id}`)
+      .patch(ADMIN_API + `/block-user/${_id}`)
       .then((response) => {
         // Check if isBlocked is true
         if (response.data.success && !response.data.user.isBlocked) {

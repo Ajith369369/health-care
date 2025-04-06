@@ -25,7 +25,7 @@ const Sidebar: React.FC = () => {
           </li>
           <li>
             <Link
-              to="/admin/requesteddoctors"
+              to="/admin/requested-doctors"
               className="block py-2 px-4 rounded-md hover:bg-gray-700"
             >
               Requested Doctors

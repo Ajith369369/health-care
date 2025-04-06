@@ -17,7 +17,7 @@ const ForgotPassword: React.FC = () => {
     },
     onSubmit: ({ email }) => {
       axios
-        .post(USER_API + "/forgot_password", { email })
+        .post(USER_API + "/forgot-password", { email })
         .then(({ data }) => showToast(data.message, "success"))
         .catch(({ response }) => {
           showToast(response.data.message, "error");

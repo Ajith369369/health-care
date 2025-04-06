@@ -38,7 +38,7 @@ const Register: React.FC = () => {
         showToast(message, "success");
         localStorage.setItem("access_token", accessToken);
         setItemToLocalStorage("userId", newUser._id);
-        navigate("/user/verify_otp");
+        navigate("/user/verify-otp");
       } catch (error: any) {
         const { message } = error.response.data;
         setIsSubmitting(false);

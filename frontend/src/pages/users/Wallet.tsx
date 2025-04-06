@@ -12,7 +12,7 @@ const Wallet: React.FC = () => {
 
   useEffect(() => {
     const fetchWalletAmount = async () => {
-      const response = await axiosJWT.get(`${USER_API}/fetchWallet/${user.id}`);
+      const response = await axiosJWT.get(`${USER_API}/fetch-wallet/${user.id}`);
       setWalletAmount(response.data.getWallet.balance);
     };
 
@@ -20,7 +20,7 @@ const Wallet: React.FC = () => {
   }, [user.id]);
 
   const goToWalletHistory = () => {
-    navigate("/user/walletHistory");
+    navigate("/user/wallet-history");
   };
 
   return (

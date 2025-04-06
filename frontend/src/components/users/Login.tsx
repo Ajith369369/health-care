@@ -46,7 +46,7 @@ const Login: React.FC = () => {
     email_verified: boolean;
   }) => {
     axios
-      .post(USER_API + "/google_signIn", { user })
+      .post(USER_API + "/google-sign-in", { user })
       .then(({ data }) => {
         const { message, user, accessToken } = data;
         localStorage.setItem("access_token", accessToken);
