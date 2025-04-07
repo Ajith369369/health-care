@@ -3,18 +3,23 @@ https://github.com/Ajith369369/health-care.git
 # **🔹 Full Folder Structure** │ ├── └──
 
 📦 health-care/
+├── 📂 .github/                         # CI/CD workflows
 │── 📂 backend/                         # 🎨 Backend (TypeScript + Express + MongoDB)
 │   ├── 📂 booking-service/             # 🔹 Microservice 1 (Clean + Hexagonal)
 │   │   ├── 📂 src/
 │   │   │   ├── 📂 application/         # ✅ Use Cases & Business Logic
 │   │   │   │   └── 📂 use-cases/       # Business Logic/Application Services (Use Case Interactors)
-│   │   │   ├── 📂 domain/              # ✅ Entities & Value Objects
+│   │   │   ├── 📂 domain/              # ✅ Entities, Repository Interfaces & Value Objects
+│   │   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
+│   │   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
 │   │   │   ├── 📂 infrastructure/      # ✅ Adapters & External Services
 │   │   │   │   ├── 📂 config/          # Environment configuration
+│   │   │   │   │   └── 📄 Config.ts       
 │   │   │   │   ├── 📂 database/        # MongoDB implementation
+│   │   │   │   │   └── 📄 mongoConnection.ts
 │   │   │   │   ├── 📂 http/            # Express controllers/routes
 │   │   │   │   └── 📂 repositories/    # MongoDB repository implementations
-│   │   │   │── 📂 interfaces/               # ✅ Ports & Adapters (controllers, middleware, routes)
+│   │   │   │── 📂 adapters/               # ✅ Ports & Adapters (controllers, middleware, routes)
 │   │   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
 │   │   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
 │   │   │   │   └── 📂 routes/               # ✅ Routing Layer
@@ -24,40 +29,30 @@ https://github.com/Ajith369369/health-care.git
 │   │   ├── 📂 src/
 │   │   │   ├── 📂 application/         # ✅ Use Cases & Business Logic
 │   │   │   │   └── 📂 use-cases/       # Business Logic/Application Services (Use Case Interactors)
-│   │   │   ├── 📂 domain/              # ✅ Entities & Value Objects
+│   │   │   ├── 📂 domain/              # ✅ Entities, Repository Interfaces & Value Objects
+│   │   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
+│   │   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
 │   │   │   ├── 📂 infrastructure/      # ✅ Adapters & External Services
 │   │   │   │   ├── 📂 config/          # Environment configuration
+│   │   │   │   │   └── 📄 Config.ts      
 │   │   │   │   ├── 📂 database/        # MongoDB implementation
+│   │   │   │   │   └── 📄 mongoConnection.ts
 │   │   │   │   ├── 📂 http/            # Express controllers/routes
 │   │   │   │   └── 📂 repositories/    # MongoDB repository implementations
-│   │   │   │── 📂 interfaces/               # ✅ Ports & Adapters (controllers, middleware, routes)
+│   │   │   │── 📂 adapters/               # ✅ Ports & Adapters (controllers, middleware, routes)
 │   │   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
 │   │   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
 │   │   │   │   └── 📂 routes/               # ✅ Routing Layer
 │   │   │   └── 📄 index.ts             # Service entry point
 │   │   └── 📄 Dockerfile
-│   ├── 📂 src/
-│   │   ├── 📂 config/                   # ✅ Environment Configs
-│   │   │   └── 📄 Config.ts       
-│   │   │── 📂 domain/                   # ✅ Entities & Repository Interfaces
-│   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
-│   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
-│   │   │── 📂 infrastructure/           # ✅ MongoDB & Auth
-│   │   │   ├── 📂 database/             # ✅ Database Connection & ORM
-│   │   │   │   └── 📄 mongoConnection.ts
-│   │   │   └── 📂 repositories/         # ✅ Implementation of Repositories (MongoDB, etc.)
-│   │   │── 📂 interfaces/               # ✅ Adapters (controllers, middleware, routes)
-│   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
-│   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
-│   │   │   └── 📂 routes/               # ✅ Routing Layer
-│   │   │── 📂 use-cases/                # ✅ Business Logic/Application Services (Use Case Interactors)
-│   │   └── 📄 server.ts                 # ✅ Express Server entry point
 │   ├── 📄 .env                          # ✅ Environment Variables (Secrets, API Keys)
 │   ├── 📄 .gitignore                    # ✅ Git ignore file
 │   ├── 📄 package-lock.json             # ✅ Locks the exact versions of dependencies
 │   ├── 📄 package.json                  # ✅ NPM Dependencies & Scripts
 │   └── 📄 tsconfig.json                 
 │── 📂 docs/                             # ✅ Additional architecture docs, diagrams
+│   ├── 📄 ADRs/                        # Architecture Decision Records
+│   └── 📄 diagrams/                    # Architecture diagrams
 │── 📂 frontend/                         # 🎨 Frontend (React/Next.js + TypeScript)
 │   ├── 📂 src/
 │   │   ├── 📂 app/                      # ✅ Application Wrapper (for Next.js)
@@ -126,13 +121,12 @@ https://github.com/Ajith369369/health-care.git
 │   ├── 📄 next.config.js                # ✅ Next.js Config
 │   └── 📄 vite.config.js                # ✅ Vite Config (if using Vite)
 ├── 📂 k8s/                              # ✅ Kubernetes Manifests
-│   ├── 📂 backend/
-│   │   ├── user-deployment.yaml
-│   │   └── booking-deployment.yaml
-│   ├── 📂 frontend/
-│   │   └── frontend-deployment.yaml
-│   └── 📂 ingress/
-│       └── ingress.yaml
+│   ├── 📂 user-service/
+│   │   ├── deployment.yaml
+│   │   └── service.yaml
+│   └── 📂 booking-service/
+│       ├── deployment.yaml
+│       └── service.yaml
 │── 📄 docker-compose.yml                # ✅ Docker compose for orchestration
 └── 📄 README.md                         # ✅ Project documentation
 
