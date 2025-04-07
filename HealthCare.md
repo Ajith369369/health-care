@@ -7,24 +7,25 @@ https://github.com/Ajith369369/health-care.git
 │   ├── 📂 src/
 │   │   ├── 📂 config/                   # ✅ Environment Configs
 │   │   │   └── 📄 Config.tsx       
-│   │   │── 📂 adapters/                 # ✅ Ports & Adapters
-│   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
-│   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
-│   │   │   └── 📂 routes/               # ✅ Routing Layer
-│   │   │── 📂 application/              # ✅ Use Cases/Business Logic
-│   │   │   └── 📂 use-cases/            # ✅ Application Services (Use Case Interactors)
-│   │   │── 📂 domain/                   # ✅ Entities & Interfaces
+│   │   │── 📂 domain/                   # ✅ Entities & Repository Interfaces
 │   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
 │   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
 │   │   │── 📂 infrastructure/           # ✅ MongoDB & Auth
 │   │   │   ├── 📂 database/             # ✅ Database Connection & ORM
 │   │   │   │   └── 📄 mongoConnection.ts
-│   │   │   ├── 📂 repositories/         # ✅ Implementation of Repositories (MongoDB, etc.)
-│   │   └── 📄 server.ts                 # ✅ Express Server Setup
+│   │   │   └── 📂 repositories/         # ✅ Implementation of Repositories (MongoDB, etc.)
+│   │   │── 📂 interfaces/               # ✅ Adapters (controllers, middleware, routes)
+│   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
+│   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
+│   │   │   └── 📂 routes/               # ✅ Routing Layer
+│   │   │── 📂 use-cases/                # ✅ Business Logic/Application Services (Use Case Interactors)
+│   │   └── 📄 server.ts                 # ✅ Express Server entry point
 │   ├── 📄 .env                          # ✅ Environment Variables (Secrets, API Keys)
 │   ├── 📄 .gitignore                    # ✅ Git ignore file
 │   ├── 📄 package-lock.json             # ✅ Locks the exact versions of dependencies
-│   └── 📄 package.json                  # ✅ NPM Dependencies & Scripts
+│   ├── 📄 package.json                  # ✅ NPM Dependencies & Scripts
+│   └── 📄 tsconfig.json                 
+│── 📂 docs/                             # 🎨 Additional architecture docs, diagrams
 │── 📂 frontend/                         # 🎨 Frontend (React/Next.js)
 │   ├── 📂 src/
 │   │   ├── 📂 app/                      # ✅ Application Wrapper (for Next.js)
@@ -32,7 +33,7 @@ https://github.com/Ajith369369/health-care.git
 │   │   │   └── 📄 Config.tsx            
 │   │   ├── 📂 context/                  # ✅ Global Context
 │   │   │   └── 📄 SocketContext.tsx     # ✅ Socket.io
-│   │   ├── 📂 components/               # ✅ Reusable UI Components
+│   │   ├── 📂 components/               # ✅ Shared UI Components
 │   │   ├── 📂 modules/                  # ✅ Feature Modules (Hexagonal Approach)
 │   │   │   ├── 📂 auth/                 # 🔹 User Authentication Module
 │   │   │   │   ├── 📂 components/       # ✅ Reusable UI Components
@@ -70,10 +71,10 @@ https://github.com/Ajith369369/health-care.git
 │   │   │   │   │   └── 📄 UserSlice.ts  # ✅ Redux Slice
 │   │   │   │   ├── 📂 pages/            # ✅ Pages
 │   │   │   │   └── 📄 index.ts          # ✅ Exports everything
-│   │   ├── 📂 pages/                    # ✅ Route-Based Pages
-│   │   ├── 📂 routes/                   # ✅ Routes
+│   │   ├── 📂 pages/                    # ✅ Route-based Pages
+│   │   ├── 📂 routes/                   # ✅ App-level routing config
 │   │   │   └── 📄 MainRouter.tsx        # ✅ Main Router
-│   │   ├── 📂 services/                 # ✅ API Calls (REST/GraphQL)
+│   │   ├── 📂 services/                 # ✅ API Clients (REST/GraphQL)
 │   │   │   ├── 📄 allAPI.ts             # ✅ Calls commonAPI.ts
 │   │   │   └── 📄 commonAPI.ts          # ✅ Common logic used for calling APIs
 │   │   ├── 📂 store/                    # ✅ State Management (Redux/Context)
@@ -92,6 +93,14 @@ https://github.com/Ajith369369/health-care.git
 │   ├── 📄 package.json                  # ✅ NPM Dependencies & Scripts
 │   ├── 📄 next.config.js                # ✅ Next.js Config
 │   └── 📄 vite.config.js                # ✅ Vite Config (if using Vite)
+├── 📂 k8s/                              # ✅ Kubernetes Manifests
+│   ├── 📂 backend/
+│   │   ├── user-deployment.yaml
+│   │   └── booking-deployment.yaml
+│   ├── 📂 frontend/
+│   │   └── frontend-deployment.yaml
+│   └── 📂 ingress/
+│       └── ingress.yaml
 │── 📄 docker-compose.yml                # ✅ Runs Frontend + Backend
-└── 📄 k8s/                              # ✅ Kubernetes Manifests
+└── 📄 README.md                        # Project documentation
 
