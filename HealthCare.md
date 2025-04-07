@@ -3,14 +3,29 @@ https://github.com/Ajith369369/health-care.git
 # **🔹 Full Folder Structure** │ ├── └──
 
 📦 health-care/
-│── 📂 backend/                      # 🎨 Backend (TypeScript + Express + MongoDB)
-│── 📂 services/                      # ✅ Backend Microservices
-│   ├── 📂 user-service/          # 🚀 Backend: Manages Users
-│   ├── 📂 note-service/          # 🚀 Backend: Handles Notes
-│   ├── 📂 notification-service/  # 🚀 Backend: Sends Notifications
-│── 📂 api-gateway/                   # ✅ Backend API Gateway
-│── 📂 shared/                        # ✅ Backend Shared Configs
-│── 📂 frontend/                      # 🎨 Frontend (React/Next.js)
+│── 📂 backend/                          # 🎨 Backend (TypeScript + Express + MongoDB)
+│   ├── 📂 src/
+│   │   ├── 📂 config/                   # ✅ Environment Configs
+│   │   │   └── 📄 Config.tsx       
+│   │   │── 📂 adapters/                 # ✅ Ports & Adapters
+│   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
+│   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
+│   │   │   └── 📂 routes/               # ✅ Routing Layer
+│   │   │── 📂 application/              # ✅ Use Cases/Business Logic
+│   │   │   └── 📂 use-cases/            # ✅ Application Services (Use Case Interactors)
+│   │   │── 📂 domain/                   # ✅ Entities & Interfaces
+│   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
+│   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
+│   │   │── 📂 infrastructure/           # ✅ MongoDB & Auth
+│   │   │   ├── 📂 database/             # ✅ Database Connection & ORM
+│   │   │   │   └── 📄 mongoConnection.ts
+│   │   │   ├── 📂 repositories/         # ✅ Implementation of Repositories (MongoDB, etc.)
+│   │   └── 📄 server.ts                 # ✅ Express Server Setup
+│   ├── 📄 .env                          # ✅ Environment Variables (Secrets, API Keys)
+│   ├── 📄 .gitignore                    # ✅ Git ignore file
+│   ├── 📄 package-lock.json             # ✅ Locks the exact versions of dependencies
+│   └── 📄 package.json                  # ✅ NPM Dependencies & Scripts
+│── 📂 frontend/                         # 🎨 Frontend (React/Next.js)
 │   ├── 📂 src/
 │   │   ├── 📂 app/                      # ✅ Application Wrapper (for Next.js)
 │   │   ├── 📂 config/                   # ✅ Environment Configs
