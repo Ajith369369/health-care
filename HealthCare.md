@@ -45,6 +45,9 @@ https://github.com/Ajith369369/health-care.git
 │   │   │   │   └── 📂 routes/               # ✅ Routing Layer
 │   │   │   └── 📄 index.ts             # Service entry point
 │   │   └── 📄 Dockerfile
+│   ├── 📂 appointment-service/                # 🔹 Microservice 3 (Clean + Hexagonal)
+│   ├── 📂 auth-service/                # 🔹 Microservice 4 (Clean + Hexagonal)
+│   ├── 📂 doctor-service/                # 🔹 Microservice 5 (Clean + Hexagonal)
 │   ├── 📄 .env                          # ✅ Environment Variables (Secrets, API Keys)
 │   ├── 📄 .gitignore                    # ✅ Git ignore file
 │   ├── 📄 package-lock.json             # ✅ Locks the exact versions of dependencies
@@ -85,12 +88,12 @@ https://github.com/Ajith369369/health-care.git
 │   │   │   │   ├── 📂 hooks/            # ✅ Custom Hooks
 │   │   │   │   ├── 📂 routes/           # ✅ API Routes
 │   │   │   │   ├── 📂 services/         # ✅ API Calls
-│   │   │   │   ├── 📂 store/            # ✅ State Management (Redux/Context)
+│   │   │   │   ├── 📂 store/             # ✅ State Management (Redux/Context)
 │   │   │   │   │   └── 📄 DoctorSlice.ts # ✅ Redux Slice
-│   │   │   │   ├── 📂 pages/            # ✅ Pages
-│   │   │   │   └── 📄 index.ts          # ✅ Exports everything
-│   │   │   └── 📂 users/                # 🔹 Users Module
-│   │   │   │   ├── 📂 components/       # ✅ Reusable UI Components
+│   │   │   │   ├── 📂 pages/             # ✅ Pages
+│   │   │   │   └── 📄 index.ts           # ✅ Exports everything
+│   │   │   └── 📂 users/                 # 🔹 Users Module
+│   │   │   │   ├── 📂 components/        # ✅ Reusable UI Components
 │   │   │   │   ├── 📂 hooks/            # ✅ Custom Hooks
 │   │   │   │   ├── 📂 routes/           # ✅ API Routes
 │   │   │   │   ├── 📂 services/         # ✅ API Calls
@@ -108,7 +111,6 @@ https://github.com/Ajith369369/health-care.git
 │   │   │   ├── 📄 rootReducer.ts        # ✅ Root Reducer
 │   │   │   └── 📄 store.ts              # ✅ Store
 │   │   ├── 📂 styles/                   # ✅ Global Styles (CSS/SASS)
-│   │   ├── 📂 utils/                    # ✅ Helper Functions
 │   │   ├── 📄 App.css                   # ✅ Styles the App component and its child elements
 │   │   ├── 📄 App.tsx                   # ✅ Main application file
 │   │   ├── 📄 index.css                 # ✅ Defines global styles that apply across the entire app
@@ -127,6 +129,9 @@ https://github.com/Ajith369369/health-care.git
 │   └── 📂 booking-service/
 │       ├── deployment.yaml
 │       └── service.yaml
+├── 📂 shared/                          # Shared code between services
+│   ├── 📂 contracts/                   # DTOs and API schemas
+│   └── 📂 lib/                         # Common utilities
 │── 📄 docker-compose.yml                # ✅ Docker compose for orchestration
 └── 📄 README.md                         # ✅ Project documentation
 
