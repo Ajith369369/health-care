@@ -3,10 +3,42 @@ https://github.com/Ajith369369/health-care.git
 # **🔹 Full Folder Structure** │ ├── └──
 
 📦 health-care/
-│── 📂 backend/                          # 🎨 Backend (TypeScript + Express + MongoDB)
+│── 📂 backend/                         # 🎨 Backend (TypeScript + Express + MongoDB)
+│   ├── 📂 booking-service/             # 🔹 Microservice 1 (Clean + Hexagonal)
+│   │   ├── 📂 src/
+│   │   │   ├── 📂 application/         # ✅ Use Cases & Business Logic
+│   │   │   │   └── 📂 use-cases/       # Business Logic/Application Services (Use Case Interactors)
+│   │   │   ├── 📂 domain/              # ✅ Entities & Value Objects
+│   │   │   ├── 📂 infrastructure/      # ✅ Adapters & External Services
+│   │   │   │   ├── 📂 config/          # Environment configuration
+│   │   │   │   ├── 📂 database/        # MongoDB implementation
+│   │   │   │   ├── 📂 http/            # Express controllers/routes
+│   │   │   │   └── 📂 repositories/    # MongoDB repository implementations
+│   │   │   │── 📂 interfaces/               # ✅ Ports & Adapters (controllers, middleware, routes)
+│   │   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
+│   │   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
+│   │   │   │   └── 📂 routes/               # ✅ Routing Layer
+│   │   │   └── 📄 index.ts             # Service entry point
+│   │   └── 📄 Dockerfile
+│   ├── 📂 user-service/                # 🔹 Microservice 2 (Clean + Hexagonal)
+│   │   ├── 📂 src/
+│   │   │   ├── 📂 application/         # ✅ Use Cases & Business Logic
+│   │   │   │   └── 📂 use-cases/       # Business Logic/Application Services (Use Case Interactors)
+│   │   │   ├── 📂 domain/              # ✅ Entities & Value Objects
+│   │   │   ├── 📂 infrastructure/      # ✅ Adapters & External Services
+│   │   │   │   ├── 📂 config/          # Environment configuration
+│   │   │   │   ├── 📂 database/        # MongoDB implementation
+│   │   │   │   ├── 📂 http/            # Express controllers/routes
+│   │   │   │   └── 📂 repositories/    # MongoDB repository implementations
+│   │   │   │── 📂 interfaces/               # ✅ Ports & Adapters (controllers, middleware, routes)
+│   │   │   │   ├── 📂 controllers/          # ✅ API Controllers (Express, GraphQL, etc.)
+│   │   │   │   ├── 📂 middleware/           # ✅ Middleware (Auth, Logging, Error Handling)
+│   │   │   │   └── 📂 routes/               # ✅ Routing Layer
+│   │   │   └── 📄 index.ts             # Service entry point
+│   │   └── 📄 Dockerfile
 │   ├── 📂 src/
 │   │   ├── 📂 config/                   # ✅ Environment Configs
-│   │   │   └── 📄 Config.tsx       
+│   │   │   └── 📄 Config.ts       
 │   │   │── 📂 domain/                   # ✅ Entities & Repository Interfaces
 │   │   │   ├── 📂 models/               # ✅ Entities (Business Objects)
 │   │   │   └── 📂 repositories/         # ✅ Repository Interfaces (Port)
