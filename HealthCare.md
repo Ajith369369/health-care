@@ -25,8 +25,8 @@ https://github.com/Ajith369369/health-care.git
 │   ├── 📄 package-lock.json             # ✅ Locks the exact versions of dependencies
 │   ├── 📄 package.json                  # ✅ NPM Dependencies & Scripts
 │   └── 📄 tsconfig.json                 
-│── 📂 docs/                             # 🎨 Additional architecture docs, diagrams
-│── 📂 frontend/                         # 🎨 Frontend (React/Next.js)
+│── 📂 docs/                             # ✅ Additional architecture docs, diagrams
+│── 📂 frontend/                         # 🎨 Frontend (React/Next.js + TypeScript)
 │   ├── 📂 src/
 │   │   ├── 📂 app/                      # ✅ Application Wrapper (for Next.js)
 │   │   ├── 📂 config/                   # ✅ Environment Configs
@@ -101,6 +101,6 @@ https://github.com/Ajith369369/health-care.git
 │   │   └── frontend-deployment.yaml
 │   └── 📂 ingress/
 │       └── ingress.yaml
-│── 📄 docker-compose.yml                # ✅ Runs Frontend + Backend
-└── 📄 README.md                        # Project documentation
+│── 📄 docker-compose.yml                # ✅ Docker compose for orchestration
+└── 📄 README.md                         # ✅ Project documentation
 
