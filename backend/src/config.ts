@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config({ path: __dirname + "/../.env" });
 
-const configKeys = {
+export const STRIPE_SECRET_KEY: string = process.env.STRIPE_SECRET_KEY;
+
+export const configKeys = {
   PORT: process.env.PORT || (5000 as number),
   CLIENT_PORT: process.env.CLIENT_PORT,
   MONGO_URL: process.env.MONGO_URL as string,
@@ -10,6 +12,6 @@ const configKeys = {
   ACCESS_SECRET: process.env.ACCESS_SECRET as string,
   ADMIN_EMAIL: process.env.ADMIN_EMAIL as string,
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD as string,
+  STRIPE_SECRET_KEY:process.env.STRIPE_SECRET_KEY as string,
 };
 
-export default configKeys;

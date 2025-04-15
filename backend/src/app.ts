@@ -11,7 +11,6 @@ import socketConfig from "./frameworks/webserver/webSocket/socket";
 import path from "path";
 import helmet from "helmet";
 
-
 const app:Application = express();
 
 const httpServer = createServer(app);
