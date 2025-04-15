@@ -1,18 +1,18 @@
-import { Request } from "express";
-import { userDbInterface } from "../../interfaces/userDbRepository";
-import { doctorDbInterface } from "../../interfaces/doctorDBRepository";
-import sentMail from "../../../utils/sendMail";
 import { doctorVerificationRejectedEmailPage } from "../../../utils/doctorVerificationRejectionEmail";
-
+import sentMail from "../../../utils/sendMail";
+import { doctorDbInterface } from "../../interfaces/doctorDBRepository";
+import { userDbInterface } from "../../interfaces/userDbRepository";
 
 export const getUsers = async (userDbRepository: ReturnType<userDbInterface>) =>
   await userDbRepository.getAllUsers();
 
-export const getAllDoctors = async (doctorDbRepository: ReturnType<doctorDbInterface>) =>
-  await doctorDbRepository.getAllDoctors();
+export const getAllDoctors = async (
+  doctorDbRepository: ReturnType<doctorDbInterface>
+) => await doctorDbRepository.getAllDoctors();
 
-export const getAllTheAppoinments = async (doctorDbRepository: ReturnType<doctorDbInterface>) =>
-  await doctorDbRepository.getAllAppoinments();
+export const getAllTheAppointments = async (
+  doctorDbRepository: ReturnType<doctorDbInterface>
+) => await doctorDbRepository.getAllAppointments();
 
 export const getDoctors = async (
   {
@@ -21,7 +21,7 @@ export const getDoctors = async (
     selectedDate,
     selectedTimeSlot,
     page,
-    limit
+    limit,
   }: {
     searchQuery?: string;
     department?: string;
@@ -38,29 +38,44 @@ export const getDoctors = async (
     selectedDate,
     selectedTimeSlot,
     page,
-    limit
+    limit,
   });
 };
 
-export const getSingleDoctor = async ( id: string, doctorDbRepository: ReturnType<doctorDbInterface>) =>
-  await doctorDbRepository.getDoctorById(id);
+export const getSingleDoctor = async (
+  id: string,
+  doctorDbRepository: ReturnType<doctorDbInterface>
+) => await doctorDbRepository.getDoctorById(id);
 
-export const getSingleUser = async ( id: string, userDbRepository: ReturnType<userDbInterface>) =>
-  await userDbRepository.getUserbyId(id);
+export const getSingleUser = async (
+  id: string,
+  userDbRepository: ReturnType<userDbInterface>
+) => await userDbRepository.getUserbyId(id);
 
-export const getDoctor = async ( id: string,status:string, doctorDbRepository: ReturnType<doctorDbInterface>) =>
-  await doctorDbRepository.getDoctorByIdUpdate(id,status);
+export const getDoctor = async (
+  id: string,
+  status: string,
+  doctorDbRepository: ReturnType<doctorDbInterface>
+) => await doctorDbRepository.getDoctorByIdUpdate(id, status);
 
-
-export const getDoctorRejected = async ( id: string,status:string,reason:string ,doctorDbRepository: ReturnType<doctorDbInterface>) =>{
-  await doctorDbRepository.getDoctorByIdUpdateRejected(id,status,reason);
-  const doctor =await doctorDbRepository.getDoctorById(id);
-  if(doctor){
-    const doctorName = doctor.doctorName
-    const email = doctor.email
+export const getDoctorRejected = async (
+  id: string,
+  status: string,
+  reason: string,
+  doctorDbRepository: ReturnType<doctorDbInterface>
+) => {
+  await doctorDbRepository.getDoctorByIdUpdateRejected(id, status, reason);
+  const doctor = await doctorDbRepository.getDoctorById(id);
+  if (doctor) {
+    const doctorName = doctor.doctorName;
+    const email = doctor.email;
     const emailSubject = "Verification Rejected";
-    sentMail(email,emailSubject,doctorVerificationRejectedEmailPage(doctorName,reason))
-  }else{
-    console.error ("Doctor not found");
+    sentMail(
+      email,
+      emailSubject,
+      doctorVerificationRejectedEmailPage(doctorName, reason)
+    );
+  } else {
+    console.error("Doctor not found");
   }
-}
+};

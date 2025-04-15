@@ -4,7 +4,7 @@ import bookingEntity from "../../../../entities/bookingEntity";
 import { BookingDbRepositoryInterface } from "../../../interfaces/bookingDbRepository";
 import { doctorDbInterface } from "../../../interfaces/doctorDBRepository";
 
-export const appoinmentBooking = async (
+export const appointmentBooking = async (
   data: any,
   userId: string,
   bookingDbRepository: ReturnType<BookingDbRepositoryInterface>,
@@ -16,13 +16,13 @@ export const appoinmentBooking = async (
     consultationType,
     fee,
     paymentStatus,
-    appoinmentStatus,
-    appoinmentCancelReason,
+    appointmentStatus,
+    appointmentCancelReason,
     date,
     timeSlot,
   } = data;
   const doctorDetails = await doctorDbRepository.getDoctorById(doctorId);
-  const appoinment = bookingEntity(
+  const appointment = bookingEntity(
     userId,
     doctorId,
     patientName,
@@ -32,13 +32,13 @@ export const appoinmentBooking = async (
     consultationType,
     fee,
     paymentStatus,
-    appoinmentStatus,
-    appoinmentCancelReason,
+    appointmentStatus,
+    appointmentCancelReason,
     date,
     timeSlot
   );
 
-  const booking = await bookingDbRepository.createBooking(appoinment);
+  const booking = await bookingDbRepository.createBooking(appointment);
 
   return booking;
 };
@@ -54,12 +54,12 @@ export const checkIsBooked = async (
     consultationType,
     fee,
     paymentStatus,
-    appoinmentStatus,
-    appoinmentCancelReason,
+    appointmentStatus,
+    appointmentCancelReason,
     date,
     timeSlot,
   } = data;
-  const appoinment = bookingEntity(
+  const appointment = bookingEntity(
     userId,
     doctorId,
     patientName,
@@ -69,8 +69,8 @@ export const checkIsBooked = async (
     consultationType,
     fee,
     paymentStatus,
-    appoinmentStatus,
-    appoinmentCancelReason,
+    appointmentStatus,
+    appointmentCancelReason,
     date,
     timeSlot
   );
@@ -155,14 +155,14 @@ export const getBookingByUserId = async (
   return { bookingDetails };
 };
 
-export const changeAppoinmentstaus = async (
-  appoinmentStatus: string,
+export const changeAppointmentstaus = async (
+  appointmentStatus: string,
   cancelReason: string,
   id: any,
   bookingRepository: ReturnType<BookingDbRepositoryInterface>
 ) => {
   const changeStatus = await bookingRepository.changeBookingstatus(
-    appoinmentStatus,
+    appointmentStatus,
     cancelReason,
     id
   );

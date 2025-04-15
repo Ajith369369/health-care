@@ -1,23 +1,24 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
   doctorId: {
-    type: mongoose.Schema.Types.ObjectId, ref: "Doctor",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Doctor",
   },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   patientName: {
     type: String,
   },
-  patientAge:{
-    type:String,
+  patientAge: {
+    type: String,
   },
-  patientNumber:{
-    tpe:String,
+  patientNumber: {
+    tpe: String,
   },
-  patientGender:{
-    type:String,
+  patientGender: {
+    type: String,
   },
-    consultationType: {
+  consultationType: {
     type: String,
     required: true,
   },
@@ -26,23 +27,23 @@ const bookingSchema = new mongoose.Schema({
     required: true,
   },
   paymentStatus: {
-    type: String, 
-    required: true, 
+    type: String,
+    required: true,
   },
-  appoinmentStatus:{
-    type:String,
-    default:"Booked"
+  appointmentStatus: {
+    type: String,
+    default: "Booked",
   },
-  appoinmentCancelReason:{
-    type:String,
+  appointmentCancelReason: {
+    type: String,
   },
-  date:{
-    type:String,
-    require:true,
+  date: {
+    type: String,
+    require: true,
   },
-  timeSlot:{
-    type:String,
-    required:true,
+  timeSlot: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -50,5 +51,4 @@ const bookingSchema = new mongoose.Schema({
   },
 });
 
-
-export default mongoose.model("Booking",bookingSchema);
+export default mongoose.model("Booking", bookingSchema);

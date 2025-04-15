@@ -1,91 +1,89 @@
-import { Request,Response,NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
+import { BookingDbRepositoryInterface } from "../app/interfaces/bookingDbRepository";
 import { doctorDbInterface } from "../app/interfaces/doctorDBRepository";
-import { doctorRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/doctorRepositoryMongodb";
-import { userDbInterface } from "../app/interfaces/userDbRepository";
-import { userRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/userRepositoryMongodb";
 import { TimeSlotDbInterface } from "../app/interfaces/timeSlotDbRepository";
-import { TimeSlotRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/timeSlotRepositotyMongodb";
-import { BookingDbRepositoryInterface} from "../app/interfaces/bookingDbRepository";
-import { BookingRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/BookingRepositoryMongodb";
-import { BookingEntityType } from "../entities/bookingEntity";
-import { appoinmentBooking, changeAppoinmentstaus, changeWallet, checkIsBooked, createPayment, getBookingByBookingId, getBookingByDoctorId, getBookingByUserId, getWalletBalance, updateBookingStatus, updateBookingStatusPayment, walletDebit } from "../app/use-cases/user/Booking/bookingUser";
-import { HttpStatus } from "../types/httpStatus";
+import { userDbInterface } from "../app/interfaces/userDbRepository";
 import { getUserById } from "../app/use-cases/user/auth/userAuth";
+import {
+  changeWallet,
+  checkIsBooked,
+  createPayment,
+  getBookingByBookingId,
+  getBookingByDoctorId,
+  getBookingByUserId,
+  getWalletBalance,
+  updateBookingStatus,
+  updateBookingStatusPayment,
+  walletDebit,
+} from "../app/use-cases/user/Booking/bookingUser";
+import { BookingRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/BookingRepositoryMongodb";
+import { doctorRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/doctorRepositoryMongodb";
+import { TimeSlotRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/timeSlotRepositotyMongodb";
+import { userRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/userRepositoryMongodb";
+import { HttpStatus } from "../types/httpStatus";
 
+const bookingController = (
+  userDbRepository: userDbInterface,
+  userRepositoryImpl: userRepositoryMongodbType,
+  doctorDbRepository: doctorDbInterface,
+  doctorDbRepositoryImpl: doctorRepositoryMongodbType,
+  timeSlotDbRepository: TimeSlotDbInterface,
+  timeSlotDbRepositoryImpl: TimeSlotRepositoryMongodbType,
+  bookingDbRepository: BookingDbRepositoryInterface,
+  bookingDbRepositoryImpl: BookingRepositoryMongodbType
+) => {
+  const dbRepositoryUser = userDbRepository(userRepositoryImpl());
+  const dbDoctorRepository = doctorDbRepository(doctorDbRepositoryImpl());
+  const dbTimeSlotRepository = timeSlotDbRepository(timeSlotDbRepositoryImpl());
+  const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImpl());
 
+  const BookAppointment = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const data = req.body;
+      const userId = req.user;
 
-const bookingController=(
-    userDbRepository: userDbInterface,
-    userRepositoryImpl: userRepositoryMongodbType,
-    doctorDbRepository: doctorDbInterface,
-    doctorDbRepositoryImpl: doctorRepositoryMongodbType,
-    timeSlotDbRepository: TimeSlotDbInterface,
-    timeSlotDbRepositoryImpl: TimeSlotRepositoryMongodbType,
-    bookingDbRepository: BookingDbRepositoryInterface,
-    bookingDbRepositoryImpl: BookingRepositoryMongodbType,
-)=>{
-    const dbRepositoryUser = userDbRepository(userRepositoryImpl());
-    const dbDoctorRepository = doctorDbRepository(doctorDbRepositoryImpl());
-    const dbTimeSlotRepository = timeSlotDbRepository(timeSlotDbRepositoryImpl());
-    const dbBookingRepository = bookingDbRepository(bookingDbRepositoryImpl());
+      const checkBooking: any = await checkIsBooked(
+        data,
+        userId,
+        dbBookingRepository
+      );
 
+      if (checkBooking) {
+        res.status(HttpStatus.OK).json({
+          success: false,
+          message: "slot already booked select another slot",
+        });
+      } else {
+        const createBooking = await appointmentBooking(
+          data,
+          userId,
+          dbBookingRepository,
+          dbDoctorRepository
+        );
 
-    const BookAppoinment = async (
-        req:Request,
-        res:Response,
-        next:NextFunction,
-    )=>{
-        try {
-            const data = req.body;
-            const userId = req.user;
+        const user = await getUserById(userId, dbRepositoryUser);
+        const sessionId = await createPayment(
+          user?.name!,
+          user?.email!,
+          createBooking.id,
+          createBooking.fee
+        );
 
-            const checkBooking:any = await checkIsBooked(
-              data,
-              userId,
-              dbBookingRepository,
-            )
-
-            if(checkBooking){
-              res.status(HttpStatus.OK).json({
-                success: false,
-                message: "slot already booked select another slot",
-              });
-            }else {
-
-              const createBooking = await appoinmentBooking(
-                  data,
-                  userId,
-                  dbBookingRepository,
-                  dbDoctorRepository,
-                  
-              );
-  
-  
-              const user = await getUserById(userId,dbRepositoryUser)
-              const sessionId= await createPayment(
-                user?.name!,
-                user?.email!,
-                createBooking.id,
-                createBooking.fee,  
-              );
-
-  
-              res.status(HttpStatus.OK).json({
-                  success: true,
-                  message: "Booking created successfully",
-                  id:sessionId,
-                });
-            }
-
-            
-        } catch (error) {
-            next(error);
-        }
-
+        res.status(HttpStatus.OK).json({
+          success: true,
+          message: "Booking created successfully",
+          id: sessionId,
+        });
+      }
+    } catch (error) {
+      next(error);
     }
+  };
 
-
-    
   /**wallet payment */
 
   const walletPayment = async (
@@ -97,41 +95,45 @@ const bookingController=(
       const data = req.body;
       const userId = req.user;
 
-      const checkBooking:any = await checkIsBooked(
+      const checkBooking: any = await checkIsBooked(
         data,
         userId,
-        dbBookingRepository,
-      )
+        dbBookingRepository
+      );
 
-      if(checkBooking){
+      if (checkBooking) {
         res.status(HttpStatus.OK).json({
           success: false,
           message: "slot already booked select another slot",
         });
-      }else {
-
-        const walletBalance:any|null = await getWalletBalance(userId,dbBookingRepository)
+      } else {
+        const walletBalance: any | null = await getWalletBalance(
+          userId,
+          dbBookingRepository
+        );
 
         const requiredAmount = data.fee;
 
-        if(walletBalance >= requiredAmount){
-          
-          const createBooking = await appoinmentBooking(
-              data,
-              userId,
-              dbBookingRepository,
-              dbDoctorRepository,
-              
+        if (walletBalance >= requiredAmount) {
+          const createBooking = await appointmentBooking(
+            data,
+            userId,
+            dbBookingRepository,
+            dbDoctorRepository
           );
 
-          const walletTransaction = await walletDebit(userId,requiredAmount,dbBookingRepository);
+          const walletTransaction = await walletDebit(
+            userId,
+            requiredAmount,
+            dbBookingRepository
+          );
 
           res.status(HttpStatus.OK).json({
             success: true,
             message: "Booking successfully",
             createBooking,
           });
-        }else{
+        } else {
           res.status(HttpStatus.OK).json({
             success: false,
             message: "Insufficient balance in wallet",
@@ -143,37 +145,30 @@ const bookingController=(
     }
   };
 
+  /**update the wallet  */
+  const changeWalletAmount = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { bookingId, fees } = req.body;
 
- /**update the wallet  */
- const changeWalletAmount = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const { bookingId, fees } = req.body;
+      const updateWallet = await changeWallet(
+        bookingId,
+        fees,
+        dbBookingRepository
+      );
+      res.status(HttpStatus.OK).json({
+        success: true,
+        message: "Bookings details fetched successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 
-    
-    
-    const updateWallet = await changeWallet(
-      bookingId,
-      fees,
-      dbBookingRepository
-    );
-    res.status(HttpStatus.OK).json({
-      success: true,
-      message: "Bookings details fetched successfully",
-    });
-
-  } catch (error) {
-    next(error)
-
-  }
-}
-
-
-
-     /**
+  /**
    * *METHOD :PATCH
    * * Update payment status and table slot information if payment status is failed
    */
@@ -188,38 +183,32 @@ const bookingController=(
       const { paymentStatus } = req.body;
 
       const updateStatus = await updateBookingStatusPayment(
-      id,
-      dbBookingRepository,
-      )
-
-
-      await updateBookingStatus(
         id,
-        paymentStatus,
-        dbBookingRepository,
+        dbBookingRepository
       );
+
+      await updateBookingStatus(id, paymentStatus, dbBookingRepository);
       res
         .status(HttpStatus.OK)
         .json({ success: true, message: "Booking status updated" });
     } catch (error) {
-      next(error)
-
+      next(error);
     }
-  }
+  };
 
-  /* method put update cancelappoinment*/
-  const cancelAppoinment = async(
-    req:Request,
-    res:Response,
-    next:NextFunction
-  )=>{
+  /* method put update cancelappointment*/
+  const cancelAppointment = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
-      const {appoinmentStatus} = req.body;
-      const {cancelReason} = req.body;
-      const {id} = req.params;
+      const { appointmentStatus } = req.body;
+      const { cancelReason } = req.body;
+      const { id } = req.params;
 
-      const updateBooking = await changeAppoinmentstaus(
-        appoinmentStatus,
+      const updateBooking = await changeAppointmentstaus(
+        appointmentStatus,
         cancelReason,
         id,
         dbBookingRepository
@@ -227,13 +216,11 @@ const bookingController=(
 
       res
         .status(HttpStatus.OK)
-        .json({ success: true, message: "Cancel Appoinment" });
-
+        .json({ success: true, message: "Cancel Appointmeent" });
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
-
+  };
 
   /*
    * * METHOD :GET
@@ -246,10 +233,7 @@ const bookingController=(
   ) => {
     try {
       const { id } = req.params;
-      const  data  = await getBookingByBookingId(
-        id,
-        dbBookingRepository
-      );
+      const data = await getBookingByBookingId(id, dbBookingRepository);
       res.status(HttpStatus.OK).json({
         success: true,
         message: "Bookings details fetched successfully",
@@ -259,7 +243,6 @@ const bookingController=(
       next(error);
     }
   };
-
 
   /*
    * * METHOD :GET
@@ -271,11 +254,8 @@ const bookingController=(
     next: NextFunction
   ) => {
     try {
-      const  {id}  = req.params;
-      const  data  = await getBookingByUserId(
-        id,
-        dbBookingRepository
-      );
+      const { id } = req.params;
+      const data = await getBookingByUserId(id, dbBookingRepository);
       res.status(HttpStatus.OK).json({
         success: true,
         message: "Bookings details fetched successfully",
@@ -286,12 +266,11 @@ const bookingController=(
     }
   };
 
-
   /**
    * *METHOD :GET
    * * Retrieve all bookings done by user
    */
-  const getAllAppoinments = async (
+  const getAllAppointments = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -309,22 +288,18 @@ const bookingController=(
     }
   };
 
-
   /*
    * * METHOD :GET
-   * * Retrieve Appoinments details by doctor id
+   * * Retrieve Appointments details by doctor id
    */
-  const getAppoinmentList = async (
+  const getAppointmentList = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const  {id}  = req.params;
-      const  data  = await getBookingByDoctorId(
-        id,
-        dbBookingRepository
-      );
+      const { id } = req.params;
+      const data = await getBookingByDoctorId(id, dbBookingRepository);
       res.status(HttpStatus.OK).json({
         success: true,
         message: "Bookings details fetched successfully",
@@ -335,25 +310,17 @@ const bookingController=(
     }
   };
 
-
-
-
-
-
-
-    return {BookAppoinment,
-        updatePaymentStatus,
-        getBookingDetails,
-        getAllBookingDetails,
-        getAllAppoinments,
-        cancelAppoinment,
-        getAppoinmentList,
-        walletPayment,
-        changeWalletAmount,
-        }
-   
-}
+  return {
+    BookAppointment,
+    updatePaymentStatus,
+    getBookingDetails,
+    getAllBookingDetails,
+    getAllAppointments,
+    cancelAppointment,
+    getAppointmentList,
+    walletPayment,
+    changeWalletAmount,
+  };
+};
 
 export default bookingController;
-
-
