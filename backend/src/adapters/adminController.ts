@@ -7,7 +7,7 @@ import { loginAdmin } from "../app/use-cases/Admin/adminAuth";
 import {
   Department,
   addOneDepartment,
-  departmentppointmee
+  departmentppointmee,
   departmentUpdate,
 } from "../app/use-cases/Admin/adminDepartment";
 import {
@@ -97,9 +97,9 @@ export default (
   /**method get fetch all appointments */
 
   const getAllAppointments = async (
-    req: Request,ppointme
+    req: Request,ppointme,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     try {
       const appointments = await getAllTheAppointments(dbDoctorRepository);

@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { configKeys } from "../../../config";
 import { HttpStatus } from "../../../types/httpStatus";
-import configKeys from "../../../config";
 
 // extending the request interface to include the user object in the req
 declare global {
@@ -28,9 +28,8 @@ export default function authenticateUser(
   }
 
   // Extract the token from the header (assuming it's in the format "Bearer <token>")
-  const tokenParts = access_token.split(' ');
+  const tokenParts = access_token.split(" ");
   const token = tokenParts.length === 2 ? tokenParts[1] : null;
-
 
   if (!token) {
     return res.status(HttpStatus.FORBIDDEN).json("Invalid access token format");
@@ -42,13 +41,11 @@ export default function authenticateUser(
         .status(HttpStatus.FORBIDDEN)
         .json({ success: false, message: "Token is not valid" });
     } else {
-      
       req.user = user.id;
       next();
     }
   });
 }
-
 
 export async function authenticateDoctor(
   req: Request,
@@ -58,12 +55,10 @@ export async function authenticateDoctor(
   try {
     const access_token = req.headers.authorization;
     if (!access_token) {
-      return res
-        .status(HttpStatus.FORBIDDEN)
-        .json("You are not authenticated");
+      return res.status(HttpStatus.FORBIDDEN).json("You are not authenticated");
     }
 
-    const tokenParts = access_token.split(' ');
+    const tokenParts = access_token.split(" ");
     const token = tokenParts.length === 2 ? tokenParts[1] : null;
 
     if (!token) {
@@ -72,10 +67,7 @@ export async function authenticateDoctor(
         .json("Invalid access token format");
     }
 
-    const doctor = jwt.verify(
-      token,
-      configKeys.ACCESS_SECRET
-    ) as JwtPayload;
+    const doctor = jwt.verify(token, configKeys.ACCESS_SECRET) as JwtPayload;
 
     if (doctor.role === "doctor") {
       req.doctor = doctor.id;
@@ -93,7 +85,6 @@ export async function authenticateDoctor(
       .json({ success: false, message: "Token is not valid" });
   }
 }
-
 
 // Admin authorization to get the access to routes in admin
 export function authenticateAdmin(
