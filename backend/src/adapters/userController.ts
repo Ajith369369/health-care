@@ -33,7 +33,7 @@ import {
   getWalletUser,
   updateUser,
 } from "../app/use-cases/user/read & update/profile";
-import { getAllTimeSlot } from "../app/use-cases/user/timeslots/get and update ";
+import { getAllTimeSlot } from "../app/use-cases/user/timeslots/get and update";
 import { doctorRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/doctorRepositoryMongodb";
 import { PrescriptionRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/prescriptionRepositoryMongodb";
 import { TimeSlotRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/timeSlotRepositotyMongodb";

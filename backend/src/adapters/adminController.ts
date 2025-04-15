@@ -7,11 +7,12 @@ import { loginAdmin } from "../app/use-cases/Admin/adminAuth";
 import {
   Department,
   addOneDepartment,
-  departmentppointmee,
+  departmentUnlist,
   departmentUpdate,
 } from "../app/use-cases/Admin/adminDepartment";
 import {
   getAllDoctors,
+  getAllTheAppointments,
   getDoctor,
   getDoctorRejected,
   getSingleDoctor,
@@ -97,9 +98,9 @@ export default (
   /**method get fetch all appointments */
 
   const getAllAppointments = async (
-    req: Request,ppointme,
+    req: Request,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ) => {
     try {
       const appointments = await getAllTheAppointments(dbDoctorRepository);
@@ -221,13 +222,11 @@ export default (
         isListed,
         dbDepartmentRepository
       );
-      return res
-        .status(HttpStatus.OK)
-        .json({
-          success: true,
-          department,
-          message: "Department added Successfully",
-        });
+      return res.status(HttpStatus.OK).json({
+        success: true,
+        department,
+        message: "Department added Successfully",
+      });
     } catch (error) {
       next(error);
     }
@@ -242,13 +241,11 @@ export default (
   ) => {
     try {
       const allDepartment = await Department(dbDepartmentRepository);
-      return res
-        .status(HttpStatus.OK)
-        .json({
-          success: true,
-          allDepartment,
-          message: "Department added Successfully",
-        });
+      return res.status(HttpStatus.OK).json({
+        success: true,
+        allDepartment,
+        message: "Department added Successfully",
+      });
     } catch (error) {
       next(error);
     }

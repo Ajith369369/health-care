@@ -1,4 +1,4 @@
-import { TimeSlotDbInterface } from "../../../../app/interfaces/timeSlotDbRepository";
+import { TimeSlotDbInterface } from "../../../interfaces/timeSlotDbRepository";
 
 
 export const getAllTimeSlot = async (timeSlotDbRepository: ReturnType<TimeSlotDbInterface>) =>

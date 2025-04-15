@@ -62,7 +62,7 @@ const doctorRoute = () => {
   );
   router.get("/status", authenticateDoctor, controller.doctorStatus);
   // router.post("/schedule",authenticateDoctor,controller.scheduleTime);
-  // router.get("/timeslots/:date",authenticateDoctor,controller.getTimeSlots);
+  // router.get("/time-slots/:date",authenticateDoctor,controller.getTimeSlots);
 
   router.post("/addSlot", authenticateDoctor, controller.addSlot);
   router.post("/getTimeSlots", authenticateDoctor, controller.getTimeSlots);
