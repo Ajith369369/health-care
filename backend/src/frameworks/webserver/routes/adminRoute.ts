@@ -28,20 +28,20 @@ export default () => {
   router.get("/users", authenticateAdmin, controller.getAllUser);
   router.get("/doctors", authenticateAdmin, controller.getAllTheDoctors);
   router.get("/appointments", authenticateAdmin, controller.getAllAppointments);
-  router.patch("/block_user/:id", authenticateAdmin, controller.userBlock);
-  router.patch("/block_doctor/:id", authenticateAdmin, controller.doctorBlock);
+  router.patch("/block-user/:id", authenticateAdmin, controller.userBlock);
+  router.patch("/block-doctor/:id", authenticateAdmin, controller.doctorBlock);
   router.get("/doctors/:id", authenticateAdmin, controller.doctorDetails);
   router.patch(
-    "/verify_doctor/:id",
+    "/verify-doctor/:id",
     authenticateAdmin,
     controller.VerifyDoctor
   );
   router.patch(
-    "/verify_doctor_rejection/:id",
+    "/verify-doctor-rejection/:id",
     authenticateAdmin,
     controller.rejectionDoctor
   );
-  router.post("/addDepartment", authenticateAdmin, controller.addDepartment);
+  router.post("/add-department", authenticateAdmin, controller.addDepartment);
   router.get("/departments", authenticateAdmin, controller.getAllDepartments);
   router.put(
     "/departments/:id",
@@ -49,7 +49,7 @@ export default () => {
     controller.updateDepartment
   );
   router.patch(
-    "/unlist_department/:id",
+    "/unlist-department/:id",
     authenticateAdmin,
     controller.unlistDepartment
   );

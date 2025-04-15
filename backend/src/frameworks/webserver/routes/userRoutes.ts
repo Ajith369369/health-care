@@ -49,12 +49,12 @@ const userRoutes = () => {
   //user Authentication Routes//
 
   router.post("/register", controller.registerUser);
-  router.post("/verify_otp", controller.verifyOtp);
-  router.post("/resend_otp", controller.resendOtp);
+  router.post("/verify-otp", controller.verifyOtp);
+  router.post("/resend-otp", controller.resendOtp);
   router.post("/login", controller.userLogin);
-  router.post("/google_signIn", controller.googleSignIn);
-  router.post("/forgot_password", controller.forgotPassword);
-  router.post("/reset_password/:token", controller.resetPassword);
+  router.post("/google-sign-in", controller.googleSignIn);
+  router.post("/forgot-password", controller.forgotPassword);
+  router.post("/reset-password/:token", controller.resetPassword);
 
   router.get("/profile", authenticateUser, controller.userProfile);
   router.get("/doctors", authenticateUser, controller.doctorPage);
@@ -68,14 +68,14 @@ const userRoutes = () => {
     controller.getDateSlots
   );
   router.post(
-    "/fetchPrescription",
+    "/fetch-prescription",
     authenticateUser,
     controller.fetchPrescription
   );
-  router.post("/uploadDocuments", authenticateUser, controller.labRecords);
+  router.post("/upload-documents", authenticateUser, controller.labRecords);
   router.get("/documents/:id", authenticateUser, controller.fetchDocuments);
   router.delete("/documents/:id", authenticateUser, controller.deleteDocument);
-  router.get("/fetchWallet/:id", authenticateUser, controller.getWallet);
+  router.get("/fetch-wallet/:id", authenticateUser, controller.getWallet);
   router.get("/transactions", authenticateUser, controller.getTransactions);
   router.get("/departments", authenticateUser, controller.getAllDepartments);
 
@@ -87,7 +87,7 @@ const userRoutes = () => {
     _bookingController.BookAppointment
   );
   router.get(
-    "/allAppointments",
+    "/all-appointments",
     authenticateUser,
     _bookingController.getAllAppointments
   );
@@ -97,17 +97,17 @@ const userRoutes = () => {
     _bookingController.updatePaymentStatus
   );
   router.post(
-    "/walletPayment",
+    "/wallet-payment",
     authenticateUser,
     _bookingController.walletPayment
   );
   router.put(
-    "/updateWallet",
+    "/update-wallet",
     authenticateUser,
     _bookingController.changeWalletAmount
   );
   router.get(
-    "/bookingdetails/:id",
+    "/booking-details/:id",
     authenticateUser,
     _bookingController.getBookingDetails
   );
@@ -117,7 +117,7 @@ const userRoutes = () => {
     _bookingController.getAllBookingDetails
   );
   router.put(
-    "/bookingdetails/:id",
+    "/booking-details/:id",
     authenticateUser,
     _bookingController.cancelAppointment
   );

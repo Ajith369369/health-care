@@ -50,8 +50,8 @@ const doctorRoute = () => {
   );
 
   router.post("/signup", controller.signup);
-  router.post("/verify_token/:token", controller.verifyToken);
-  router.post("/google_signIn", controller.googleSignIn);
+  router.post("/verify-token/:token", controller.verifyToken);
+  router.post("/google-sign-in", controller.googleSignIn);
   router.post("/login", controller.login);
 
   router.get("/profile", authenticateDoctor, controller.doctorProfile);
@@ -64,25 +64,25 @@ const doctorRoute = () => {
   // router.post("/schedule",authenticateDoctor,controller.scheduleTime);
   // router.get("/time-slots/:date",authenticateDoctor,controller.getTimeSlots);
 
-  router.post("/addSlot", authenticateDoctor, controller.addSlot);
-  router.post("/getTimeSlots", authenticateDoctor, controller.getTimeSlots);
-  router.delete("/deleteSlot/:id", authenticateDoctor, controller.deleteSlot);
+  router.post("/add-slot", authenticateDoctor, controller.addSlot);
+  router.post("/get-time-slots", authenticateDoctor, controller.getTimeSlots);
+  router.delete("/delete-slot/:id", authenticateDoctor, controller.deleteSlot);
   // router.delete("/deleteTime/:id",authenticateDoctor,controller.removeTimeSlot);
   router.get("/user/:id", authenticateDoctor, controller.userDetails);
   router.get("/patients", authenticateDoctor, controller.getPatientList);
   router.get("/patients/:id", authenticateDoctor, controller.getPatientDetails);
   router.get(
-    "/doctorDetails/:id",
+    "/doctor-details/:id",
     authenticateDoctor,
     controller.getDoctorDetails
   );
   router.put(
-    "/reapply_verification/:id",
+    "/reapply-verification/:id",
     authenticateDoctor,
     controller.getDoctorRejected
   );
   router.post(
-    "/addPrescription",
+    "/add-prescription",
     authenticateDoctor,
     controller.addPrescription
   );
@@ -100,7 +100,7 @@ const doctorRoute = () => {
   /*Booking Routes for booking Controller */
 
   router.get(
-    "/bookingdetails/:id",
+    "/booking-details/:id",
     authenticateDoctor,
     _bookingController.getAppointmentList
   );
