@@ -1,10 +1,10 @@
 export const SERVER_URL: string = import.meta.env.VITE_SERVER_URL;
 export const BASE_URL: string = import.meta.env.VITE_BASE_URL;
-export const USER_API: string = import.meta.env.VITE_USER_API;
-export const DOCTOR_API: string = import.meta.env.VITE_DOCTOR_API;
-export const ADMIN_API: string = import.meta.env.VITE_ADMIN_API;
-export const TOKEN_API: string = import.meta.env.VITE_TOKEN_API;
-export const CHAT_API: string = import.meta.env.VITE_CHAT_API;
+export const USER_API: string = `${BASE_URL}/user`;
+export const DOCTOR_API: string = `${BASE_URL}/doctor`;
+export const ADMIN_API: string = `${BASE_URL}/admin`;
+export const TOKEN_API: string = `${BASE_URL}/token`;
+export const CHAT_API: string = `${BASE_URL}/chat`;
 export const CLOUDINARY_UPLOAD_API: string = import.meta.env.VITE_CLOUDINARY_UPLOAD_API;
 export const CLOUDINARY_UPLOAD_PRESET: string = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 export const ZEGO_SERVER_SECRET: string = import.meta.env.VITE_ZEGO_SERVER_SECRET;
