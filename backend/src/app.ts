@@ -1,17 +1,16 @@
-import express, {Application,NextFunction,Request,Response} from "express";
-import expressConfig from "./frameworks/webserver/expressConfig";
-import startServer from "./frameworks/webserver/server";
+import express, { Application, NextFunction, Request, Response } from "express";
+import { createServer } from "http";
+import path from "path";
+import { Server } from "socket.io";
 import connectDB from "./frameworks/database/mongodb/connection";
-import CustomError from "./utils/customError";
+import expressConfig from "./frameworks/webserver/expressConfig";
 import errorHandlingMiddleware from "./frameworks/webserver/middlewares/errorhandler.middleware";
 import routes from "./frameworks/webserver/routes";
-import { createServer } from "http";
-import { Server } from "socket.io";
+import startServer from "./frameworks/webserver/server";
 import socketConfig from "./frameworks/webserver/webSocket/socket";
-import path from "path";
-import helmet from "helmet";
+import CustomError from "./utils/customError";
 
-const app:Application = express();
+const app: Application = express();
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -22,26 +21,32 @@ const io = new Server(httpServer, {
   },
 });
 
-app.use(
-  express.static(path.join(__dirname, "../../frontend/dist"))
-);
-
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 socketConfig(io);
 expressConfig(app);
 connectDB();
 routes(app);
-startServer(httpServer);
 
-
-app.get("*", (req: Request, res: Response) => {
-  res.sendFile(
-    path.join(__dirname, "../../frontend/dist/index.html")
-  );
+// ✅ 404 Not Found Handler - use this AFTER routes
+app.all("*", (req, res, next: NextFunction) => {
+  next(new CustomError(`Not found : ${req.url}`, 404));
 });
 
-
+// ✅ Global Error Handler - use this AFTER 404
 app.use(errorHandlingMiddleware);
-app.all("*",(req, res, next: NextFunction)=>{
-    next(new CustomError(`Not found : ${req.url}`, 404));
+
+// ✅ Add this at the END (after all routes and middlewares)
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error("❌ ERROR:", err.stack); // logs full stack trace
+  console.error(`🔍 Error handler registered in file: ${__filename}`);
+  res.status(500).json({ message: "Internal Server Error" });
 });
+
+// ✅ Catch-all frontend routing (must be after error handling if you don’t want it to interfere)
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
+
+// ✅ Start server
+startServer(httpServer);
