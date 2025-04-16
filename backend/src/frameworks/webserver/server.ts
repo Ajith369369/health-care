@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import { Server } from "http";
 import { configKeys } from "../../config";
 

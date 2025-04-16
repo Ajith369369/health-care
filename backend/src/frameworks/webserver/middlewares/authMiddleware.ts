@@ -99,7 +99,7 @@ export function authenticateAdmin(
   const access_token = authHeader.split(" ")[1];
   jwt.verify(access_token, configKeys.ACCESS_SECRET, (err: any, user: any) => {
     if (err) {
-      res
+      return res
         .status(HttpStatus.FORBIDDEN)
         .json({ success: false, message: "Token is not valid" });
     } else {

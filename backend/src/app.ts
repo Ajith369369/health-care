@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import express, { Application, NextFunction, Request, Response } from "express";
 import { createServer } from "http";
 import path from "path";
@@ -29,7 +31,7 @@ connectDB();
 routes(app);
 
 // ✅ 404 Not Found Handler - use this AFTER routes
-app.all("*", (req, res, next: NextFunction) => {
+app.all(/(.*)/, (req, res, next: NextFunction) => {
   next(new CustomError(`Not found : ${req.url}`, 404));
 });
 
@@ -44,7 +46,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // ✅ Catch-all frontend routing (must be after error handling if you don’t want it to interfere)
-app.get("*", (req: Request, res: Response) => {
+app.get(/(.*)/, (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 

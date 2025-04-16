@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import { Request,Response,NextFunction } from "express";
 import CustomError from "../../../utils/customError";
 
