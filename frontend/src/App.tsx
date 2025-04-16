@@ -14,7 +14,7 @@ const App: React.FC = () => {
       <StrictMode>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+            <GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
               <BrowserRouter>
                 <SocketProvider>
                   <MainRouter />

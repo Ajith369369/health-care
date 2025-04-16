@@ -1,5 +1,6 @@
 export const SERVER_URL: string = import.meta.env.VITE_SERVER_URL;
 export const BASE_URL: string = import.meta.env.VITE_BASE_URL;
+export const GOOGLE_CLIENT_ID: string = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 export const USER_API: string = `${BASE_URL}/user`;
 export const DOCTOR_API: string = `${BASE_URL}/doctor`;
 export const ADMIN_API: string = `${BASE_URL}/admin`;
