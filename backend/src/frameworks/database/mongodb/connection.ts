@@ -1,5 +1,5 @@
 import moongoose from "mongoose";
-import configKeys from "../../../config";
+import {configKeys} from "../../../config";
 
 const connectDB = async () =>{
     try{
