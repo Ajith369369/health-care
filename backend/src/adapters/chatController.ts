@@ -1,19 +1,17 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ChatDbRepositoryInterace } from "../app/interfaces/chatDbRepository";
-import { ChatRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/chatRepositoryMongodb";
-import { HttpStatus } from "../types/httpStatus";
-import { get } from "mongoose";
 import { addNewChat, newMessage } from "../app/use-cases/chat/add";
 import { getChats, getMessages } from "../app/use-cases/chat/read";
-
+import { ChatRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/chatRepositoryMongodb";
+import { HttpStatus } from "../types/httpStatus";
 
 const chatController = (
-    chatDbRepository: ChatDbRepositoryInterace,
-    chatDbRepositoryImpl: ChatRepositoryMongodbType
-  ) => {
-    const chatRepository = chatDbRepository(chatDbRepositoryImpl());
+  chatDbRepository: ChatDbRepositoryInterace,
+  chatDbRepositoryImpl: ChatRepositoryMongodbType
+) => {
+  const chatRepository = chatDbRepository(chatDbRepositoryImpl());
 
-    /*
+  /*
    * METHOD:POST
    * create new chats with two users
    */
@@ -23,20 +21,20 @@ const chatController = (
     next: NextFunction
   ) => {
     try {
-      const { senderId, recieverId } = req.body;
+      const { senderId, receiverId } = req.body;
 
-      const chats = await addNewChat(senderId, recieverId, chatRepository);
+      const chats = await addNewChat(senderId, receiverId, chatRepository);
       res.status(HttpStatus.OK).json({ success: true, chats });
     } catch (error) {
       next(error);
     }
   };
 
-   /*
+  /*
    * METHOD:GET
    * Retrive all the conversations/chats between the users
    */
-   const fetchChats = async (
+  const fetchChats = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -49,7 +47,6 @@ const chatController = (
       next(error);
     }
   };
-
 
   /*
    * METHOD:POST
@@ -68,36 +65,30 @@ const chatController = (
     }
   };
 
-   /*
+  /*
    * METHOD:GET
    * Retrive all  messages from  the users
    */
-   const fetchMessages = async (
+  const fetchMessages = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const { conversationId } = req.params 
+      const { conversationId } = req.params;
 
-      const messages = await getMessages(
-        conversationId,
-        chatRepository
-      );
-      res
-        .status(HttpStatus.OK)
-        .json({ success: true, messages });
+      const messages = await getMessages(conversationId, chatRepository);
+      res.status(HttpStatus.OK).json({ success: true, messages });
     } catch (error) {
       next(error);
     }
   };
-  
+
   return {
     createNewChat,
     fetchChats,
     createNewMessage,
     fetchMessages,
-  }
-
   };
-    export default chatController;    
+};
+export default chatController;

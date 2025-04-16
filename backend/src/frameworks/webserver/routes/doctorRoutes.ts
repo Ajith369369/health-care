@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import express from "express";
 import bookingController from "../../../adapters/bookingController";
 import doctorController from "../../../adapters/doctorController";
@@ -18,6 +20,7 @@ import { authService } from "../../services/authService";
 import { authenticateDoctor } from "../middlewares/authMiddleware";
 
 const doctorRoute = () => {
+
   const router = express.Router();
 
   //doctor controller

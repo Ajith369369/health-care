@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import { Router } from "express";
 import adminController from "../../../adapters/adminController";
 import { departmentDbRepository } from "../../../app/interfaces/departmentDbRepository";

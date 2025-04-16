@@ -1,15 +1,14 @@
-import { NextFunction, Request, Response } from "express";
-import { HttpStatus } from "../types/httpStatus";
-import { AuthServiceInterfaceType } from "../app/service-interface/authServiceInterface";
-import { AuthService } from "../frameworks/services/authService";
+import { Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import configKeys from "../config";
-import { userDbInterface } from "../app/interfaces/userDbRepository";
-import { userRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/userRepositoryMongodb";
 import { doctorDbInterface } from "../app/interfaces/doctorDBRepository";
-import { doctorRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/doctorRepositoryMongodb";
-import { getUserById } from "../app/use-cases/user/auth/userAuth";
+import { userDbInterface } from "../app/interfaces/userDbRepository";
+import { AuthServiceInterfaceType } from "../app/service-interface/authServiceInterface";
 import { getDoctorById } from "../app/use-cases/doctor/authDoctor";
+import { getUserById } from "../app/use-cases/user/auth/userAuth";
+import { doctorRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/doctorRepositoryMongodb";
+import { userRepositoryMongodbType } from "../frameworks/database/mongodb/repositories/userRepositoryMongodb";
+import { AuthService } from "../frameworks/services/authService";
+import { HttpStatus } from "../types/httpStatus";
 
 const tokenContoller = (
   authServiceInterface: AuthServiceInterfaceType,
@@ -66,9 +65,7 @@ const tokenContoller = (
           .json({ success: true, access_token, user: restaurant });
       }
 
-      return res
-        .status(HttpStatus.OK)
-        .json({ success: true, access_token });
+      return res.status(HttpStatus.OK).json({ success: true, access_token });
     } catch (error) {
       console.error("Error in token controller:", error);
       return res

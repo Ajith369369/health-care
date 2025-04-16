@@ -3,15 +3,15 @@ import { ChatDbRepositoryInterace } from "../../interfaces/chatDbRepository";
 
 export const addNewChat = async (
   senderId: string,
-  recieverId: string,
+  receiverId: string,
   chatRepository: ReturnType<ChatDbRepositoryInterace>
 ) => {
-  const isChatExist = await chatRepository.isChatExists(senderId, recieverId);
+  const isChatExist = await chatRepository.isChatExists(senderId, receiverId);
   if (isChatExist) return isChatExist;
-  return await chatRepository.createNewChat([senderId, recieverId]);
+  return await chatRepository.createNewChat([senderId, receiverId]);
 };
 
 export const newMessage = async (
-    newMessageData: newMessageInterface,
-    chatRepository: ReturnType<ChatDbRepositoryInterace>
-  ) => await chatRepository.addNewMessage(newMessageData);
+  newMessageData: newMessageInterface,
+  chatRepository: ReturnType<ChatDbRepositoryInterace>
+) => await chatRepository.addNewMessage(newMessageData);

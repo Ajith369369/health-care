@@ -2,41 +2,38 @@ import { ChatRepositoryMongodbType } from "../../frameworks/database/mongodb/rep
 import { newMessageInterface } from "../../types/chat";
 
 export default function chatDbRepository(
-    repository: ReturnType<ChatRepositoryMongodbType>
-  ) {
-    
-    const isChatExists = async (senderId: string, recieverId: string) =>
-        repository.isChatExists(senderId, recieverId);
+  repository: ReturnType<ChatRepositoryMongodbType>
+) {
+  const isChatExists = async (senderId: string, receiverId: string) =>
+    repository.isChatExists(senderId, receiverId);
 
-    const createNewChat = async (members: string[]) =>
-        await repository.addNewChat(members);
+  const createNewChat = async (members: string[]) =>
+    await repository.addNewChat(members);
 
-    const getConversationById = async (id: string) =>
-        repository.getConversationById(id);
-    
-    const getAllConversations = async (id: string) =>
-        await repository.getChatsByMembers(id);
+  const getConversationById = async (id: string) =>
+    repository.getConversationById(id);
 
-    const addNewMessage = async (newMessageData: newMessageInterface) =>
-        await repository.addNewMessage(newMessageData);
+  const getAllConversations = async (id: string) =>
+    await repository.getChatsByMembers(id);
 
-    const getLatestMessage = async (filter: Record<string, any>) =>
-        await repository.messages(filter);
-    
-      const getPaginatedMessage = async (conversationId:string) => await repository.paginatedMessages(conversationId);
-    
-    
+  const addNewMessage = async (newMessageData: newMessageInterface) =>
+    await repository.addNewMessage(newMessageData);
 
-    return {
-        isChatExists,
-        createNewChat,
-        getConversationById,
-        getAllConversations,
-        addNewMessage,
-        getLatestMessage,
-        getPaginatedMessage,
-    }
+  const getLatestMessage = async (filter: Record<string, any>) =>
+    await repository.messages(filter);
 
-  }
+  const getPaginatedMessage = async (conversationId: string) =>
+    await repository.paginatedMessages(conversationId);
 
-  export type ChatDbRepositoryInterace = typeof chatDbRepository;
+  return {
+    isChatExists,
+    createNewChat,
+    getConversationById,
+    getAllConversations,
+    addNewMessage,
+    getLatestMessage,
+    getPaginatedMessage,
+  };
+}
+
+export type ChatDbRepositoryInterace = typeof chatDbRepository;

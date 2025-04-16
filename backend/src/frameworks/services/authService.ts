@@ -1,53 +1,59 @@
 import bcrypt from "bcrypt";
-import configKeys from "../../config";
 import jwt from "jsonwebtoken";
-
+import { configKeys } from "../../config";
 
 //hashing password
-export const authService = () =>{
-    const encryptPassword = async (password:string)=>{
-        const salt = await bcrypt.genSalt(10);
-        return await bcrypt.hash(password,salt);
+export const authService = () => {
+  const encryptPassword = async (password: string) => {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+  };
+
+  //compare password of input and db
+  const comparePassword = async (inputPassword: string, password: string) => {
+    return await bcrypt.compare(inputPassword, password);
+  };
+
+  const getRandomString = () => crypto.randomUUID();
+
+  //generate otp
+  const generateOTP = () => {
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    return `${otp}`;
+  };
+
+  //create access token for users
+  const createTokens = (id: string, name: string, role: string) => {
+    const payload = {
+      id,
+      name,
+      role,
     };
+    const accessToken = jwt.sign(payload, configKeys.ACCESS_SECRET);
 
-    //compare password of input and db
-    const comparePassword = async(inputPassword: string, password: string)=>{
-        return await bcrypt.compare(inputPassword,password);
-    }
+    return accessToken;
+  };
 
-    const getRandomString = () => crypto.randomUUID();
+  const doctorCreateTokens = (id: string, name: string, role: string) => {
+    const payload = {
+      id,
+      name,
+      role,
+    };
+    const accessToken = jwt.sign(payload, configKeys.ACCESS_SECRET);
 
-    //generate otp
-    const generateOTP = () =>{
-        const otp = Math.floor(100000 + Math.random() * 900000)
-        return `${otp}`;
-    }
+    return accessToken;
+  };
 
-    //create access token for users 
-    const createTokens = (id: string, name: string, role:string)=>{
-        const payload = {
-            id,
-            name,
-            role,
-        };
-        const accessToken = jwt.sign(payload, configKeys.ACCESS_SECRET);
-        
-        return accessToken;
-    }
-
-    const doctorCreateTokens = (id:string,name:string, role:string)=>{
-        const payload = {
-            id,
-            name,
-            role,
-        };
-        const accessToken = jwt.sign(payload,configKeys.ACCESS_SECRET);
-
-        return accessToken;
-    }
-
-    return{encryptPassword,generateOTP,comparePassword,createTokens,getRandomString,doctorCreateTokens};
-}
+  return {
+    encryptPassword,
+    generateOTP,
+    comparePassword,
+    createTokens,
+    getRandomString,
+    doctorCreateTokens,
+  };
+};
 
 export type AuthService = typeof authService;
 export type AuthserviceReturn = ReturnType<AuthService>;

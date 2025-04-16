@@ -1,3 +1,5 @@
+console.log(`🔄 Loading file: ${__filename}`);
+
 import express from "express";
 import bookingController from "../../../adapters/bookingController";
 import userController from "../../../adapters/userController";
@@ -15,7 +17,7 @@ import { prescriptionRepositoryMongodb } from "../../database/mongodb/repositori
 import { timeSlotRepositoryMongodb } from "../../database/mongodb/repositories/timeSlotRepositotyMongodb";
 import { userRepositoryMongodb } from "../../database/mongodb/repositories/userRepositoryMongodb";
 import { authService } from "../../services/authService";
-import authenticateUser from "../middlewares/authMiddleware";
+import { authenticateUser } from "../middlewares/authMiddleware";
 
 const userRoutes = () => {
   const router = express.Router();
