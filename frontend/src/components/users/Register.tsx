@@ -29,11 +29,31 @@ const Register: React.FC = () => {
     onSubmit: async (values, { setSubmitting }) => {
       setIsSubmitting(true);
       try {
-        const { name, email, password } = values;
+        const {
+          name,
+          email,
+          password,
+          confirmPassword = "",
+          phoneNumber = "",
+          department = "",
+          education = "",
+          description = "",
+          experience = "",
+          licenseCertificate = null,
+          consultationType = "",
+        } = values;
         const { data } = await axios.post(USER_API + "/register", {
           name,
           email,
           password,
+          confirmPassword,
+          phoneNumber,
+          department,
+          education,
+          description,
+          experience,
+          licenseCertificate,
+          consultationType,
         });
         const { message, accessToken, newUser } = data;
         showToast(message, "success");
