@@ -35,7 +35,11 @@ const Register: React.FC = () => {
         navigate("/user/verify-otp");
       } catch (error: any) {
         console.log(error);
-        const { message } = error.response.data;
+        // const { message } = error.response.data;
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong!";
         showToast(message, "error");
       } finally {
         setSubmitting(false);
