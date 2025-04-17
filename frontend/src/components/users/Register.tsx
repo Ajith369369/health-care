@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
 import { setItemToLocalStorage } from "../../utils/set&Get";
 import showToast from "../../utils/toast";
-import validateSignUpUser from "../../utils/validationSignup";
+import validateSignUp from "../../utils/validationSignup";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Register: React.FC = () => {
       licenseCertificate: null,
       consultationType: "",
     },
-    validate: validateSignUpUser,
+    validate: validateSignUp,
     onSubmit: async ({ name, email, password }) => {
       setIsSubmitting(true);
       try {
