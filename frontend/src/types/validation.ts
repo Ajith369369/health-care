@@ -1,4 +1,11 @@
-export type SignupValidation = Partial<{
+export type UserSignupValidation = Partial<{
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}>;
+
+export type DoctorSignupValidation = Partial<{
   name: string;
   email: string;
   password: string;
@@ -11,7 +18,14 @@ export type SignupValidation = Partial<{
   licenseCertificate: string;
 }>;
 
-export interface SignupValues {
+export interface UserSignupValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface DoctorSignupValues {
   name: string;
   email: string;
   password: string;

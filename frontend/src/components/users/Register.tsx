@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
 import { setItemToLocalStorage } from "../../utils/set&Get";
 import showToast from "../../utils/toast";
-import validateSignUp from "../../utils/validationSignup";
+import { validateUserSignup } from "../../utils/validationSignup";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -17,43 +17,16 @@ const Register: React.FC = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      phoneNumber: "",
-      department: "",
-      education: "",
-      description: "",
-      experience: "",
-      licenseCertificate: null,
-      consultationType: "",
     },
-    validate: validateSignUp,
+    validate: validateUserSignup,
     onSubmit: async (values, { setSubmitting }) => {
       setIsSubmitting(true);
       try {
-        const {
-          name,
-          email,
-          password,
-          confirmPassword = "",
-          phoneNumber = "",
-          department = "",
-          education = "",
-          description = "",
-          experience = "",
-          licenseCertificate = null,
-          consultationType = "",
-        } = values;
+        const { name, email, password } = values;
         const { data } = await axios.post(USER_API + "/register", {
           name,
           email,
           password,
-          confirmPassword,
-          phoneNumber,
-          department,
-          education,
-          description,
-          experience,
-          licenseCertificate,
-          consultationType,
         });
         const { message, accessToken, newUser } = data;
         showToast(message, "success");
