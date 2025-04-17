@@ -26,9 +26,10 @@ const Register: React.FC = () => {
       consultationType: "",
     },
     validate: validateSignUp,
-    onSubmit: async ({ name, email, password }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       setIsSubmitting(true);
       try {
+        const { name, email, password } = values;
         const { data } = await axios.post(USER_API + "/register", {
           name,
           email,
@@ -41,8 +42,9 @@ const Register: React.FC = () => {
         navigate("/user/verify-otp");
       } catch (error: any) {
         const { message } = error.response.data;
-        setIsSubmitting(false);
         showToast(message, "error");
+      } finally {
+        setSubmitting(false);
       }
     },
   });
