@@ -87,6 +87,7 @@ const validateSignUp = (values: SignupValues): SignupValidation => {
     errors.licenseCertificate = "Required*";
   }
 
+  console.log("Validation Errors:", errors); 
   return errors;
 };
 
