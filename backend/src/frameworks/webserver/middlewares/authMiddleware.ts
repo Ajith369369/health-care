@@ -17,7 +17,7 @@ const ADMIN_EMAIL = configKeys.ADMIN_EMAIL;
 const ADMIN_PASSWORD = configKeys.ADMIN_PASSWORD;
 
 // verify the token and validate user
-export async function authenticateUser(
+export function authenticateUser(
   req: Request,
   res: Response,
   next: NextFunction
@@ -47,7 +47,7 @@ export async function authenticateUser(
   });
 }
 
-export async function authenticateDoctor(
+export function authenticateDoctor(
   req: Request,
   res: Response,
   next: NextFunction
