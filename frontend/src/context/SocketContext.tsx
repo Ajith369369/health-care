@@ -1,6 +1,6 @@
-import { ReactNode, useContext, createContext } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { io, Socket } from "socket.io-client";
-import { SERVER_URL } from "../Config";
+import { BACKEND_URL } from "../Config";
 
 const SocketContext = createContext<Socket | null>(null);
 SocketContext.displayName = "Socket Context";
@@ -8,7 +8,7 @@ SocketContext.displayName = "Socket Context";
 export const useSocket = () => useContext(SocketContext);
 
 const SocketProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const socket = io(SERVER_URL);
+  const socket = io(BACKEND_URL);
   socket.on("connect", () => console.log("connected"));
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>

@@ -114,8 +114,8 @@ export const createPayment = async (
       },
     ],
     mode: "payment",
-    success_url: `${configKeys.CLIENT_PORT}/payment_status/${bookingId}?success=true`,
-    cancel_url: `${configKeys.CLIENT_PORT}/payment_status/${bookingId}?success=false`,
+    success_url: `${configKeys.FRONTEND_URL}/payment-status/${bookingId}?success=true`,
+    cancel_url: `${configKeys.FRONTEND_URL}/payment-status/${bookingId}?success=false`,
   });
   return session.id;
 };
