@@ -14,13 +14,12 @@ import { bookingRepositoryMongodb } from "../../database/mongodb/repositories/Bo
 import { departmentRepositoryMongodb } from "../../database/mongodb/repositories/departmentRepositoryMongodb";
 import { doctorRepositoryMongodb } from "../../database/mongodb/repositories/doctorRepositoryMongodb";
 import { prescriptionRepositoryMongodb } from "../../database/mongodb/repositories/prescriptionRepositoryMongodb";
-import { timeSlotRepositoryMongodb } from "../../database/mongodb/repositories/timeSlotRepositotyMongodb";
+import { timeSlotRepositoryMongodb } from "../../database/mongodb/repositories/timeSlotRepositoryMongodb";
 import { userRepositoryMongodb } from "../../database/mongodb/repositories/userRepositoryMongodb";
 import { authService } from "../../services/authService";
 import { authenticateDoctor } from "../middlewares/authMiddleware";
 
 const doctorRoute = () => {
-
   const router = express.Router();
 
   //doctor controller
