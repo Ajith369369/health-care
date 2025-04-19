@@ -15,11 +15,27 @@ import CustomError from "./utils/customError";
 
 const app: Application = express();
 
+// 🔍 Log all the incoming request headers.
+app.use((req, res, next) => {
+  console.log("📥 Incoming Request Headers:", req.headers);
+  next();
+});
+
+// 🔍 Log all the outgoing response headers.
+app.use((req, res, next) => {
+  const originalSend = res.send;
+  res.send = function (body) {
+    console.log("📤 Outgoing Response Headers:", res.getHeaders());
+    return originalSend.call(this, body);
+  };
+  next();
+});
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    // origin: configKeys.FRONTEND_URL,
-    origin: "*", // 🚨 For local development only!
+    origin: configKeys.FRONTEND_URL,
+    // origin: "*", // 🚨 For local development only!
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,6 +45,17 @@ const io = new Server(httpServer, {
 
 socketConfig(io);
 expressConfig(app);
+
+// 🔧 CORS headers middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", configKeys.FRONTEND_URL);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.sendStatus(200);
+  next();
+});
+
 connectDB();
 routes(app);
 

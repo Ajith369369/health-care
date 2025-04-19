@@ -8,7 +8,8 @@ SocketContext.displayName = "Socket Context";
 export const useSocket = () => useContext(SocketContext);
 
 const SocketProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const socket = io(BACKEND_URL);
+  const socket = io(BACKEND_URL, {
+    withCredentials: true,});
   socket.on("connect", () => console.log("connected"));
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>

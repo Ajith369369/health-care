@@ -32,7 +32,7 @@ export const doctorRepositoryMongodb = () => {
       description: doctorData.getDescription(),
       experience: doctorData.getExperience(),
       rejectedReason: doctorData.getRejectedReason(),
-      lisenceCertificate: doctorData.getLisenceCertificate(),
+      licenseCertificate: doctorData.getLicenseCertificate(),
     });
     return await newDoctor.save();
   };

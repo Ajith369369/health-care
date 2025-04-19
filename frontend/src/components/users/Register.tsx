@@ -23,6 +23,7 @@ const Register: React.FC = () => {
       setIsSubmitting(true);
       try {
         const { name, email, password } = values;
+        console.log('🛠️ USER_API: ', USER_API)
         const { data } = await axios.post(USER_API + "/register", {
           name,
           email,

@@ -1,78 +1,79 @@
 import mongoose from "mongoose";
-const doctorSchema = new mongoose.Schema({
+const doctorSchema = new mongoose.Schema(
+  {
     doctorName: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-      },
-      phone: {
-        type: String,
-      },
-      password: {
-        type: String,
-      },
-      phoneNumber:{
-        type:String,
-      },
-      department: {
-        type:String,
-      },
-      role: {
-        type: String,
-        enum: ["doctor"],
-        default: "doctor",
-      },
-      education:{
-        type:String,
-      },
-      experience:{
-        type:String,
-      },
-      description:{
-        type:String,
-      },
-      lisenceCertificate:{
-        type:String,
-      },
-      gender:{
-        type:String,    
+      type: String,
+      required: true,
     },
-    profileImage:{
-        type:String,
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+    },
+    password: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    department: {
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: ["doctor"],
+      default: "doctor",
+    },
+    education: {
+      type: String,
+    },
+    experience: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    licenseCertificate: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    profileImage: {
+      type: String,
     },
     isVerified: {
-        type: Boolean,
-        default: false,
-      },
-    isBlocked:{
-        type:Boolean,
-        default:false,
+      type: Boolean,
+      default: false,
     },
-    isApproved:{
-      type:Boolean,
-      default:false,
+    isBlocked: {
+      type: Boolean,
+      default: false,
     },
-    status:{
-      type:String,
-      default:"pending",
+    isApproved: {
+      type: Boolean,
+      default: false,
     },
-    rejectedReason:{
-      type:String,
-      default:"",
+    status: {
+      type: String,
+      default: "pending",
     },
-    consultationType:{
-      type:String,
+    rejectedReason: {
+      type: String,
+      default: "",
     },
-    createdAt:{
-        type:Date,
-        default: new Date(),
+    consultationType: {
+      type: String,
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
     },
     verificationToken: String,
-},
-{timestamps:true}
-)
+  },
+  { timestamps: true }
+);
 
-export default mongoose.model("Doctor",doctorSchema);
+export default mongoose.model("Doctor", doctorSchema);
