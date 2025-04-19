@@ -20,7 +20,7 @@ const refreshTokenRoute = () => {
     doctorRepositoryMongodb
   );
 
-  router.get("/accessToken", controller.returnAccessToClient);
+  router.get("/access-token", controller.returnAccessToClient);
 
   return router;
 };

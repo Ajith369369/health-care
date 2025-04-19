@@ -4,6 +4,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import { createServer } from "http";
 import path from "path";
 import { Server } from "socket.io";
+import { configKeys } from "./config";
 import connectDB from "./frameworks/database/mongodb/connection";
 import expressConfig from "./frameworks/webserver/expressConfig";
 import errorHandlingMiddleware from "./frameworks/webserver/middlewares/errorhandler.middleware";
@@ -17,7 +18,8 @@ const app: Application = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: true,
+    // origin: configKeys.FRONTEND_URL,
+    origin: "*", // 🚨 For local development only!
     methods: ["GET", "POST"],
     credentials: true,
   },
