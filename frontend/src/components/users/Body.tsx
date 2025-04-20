@@ -10,6 +10,7 @@ const Body: React.FC = () => {
     const fetchDoctors = async () => {
       try {
         const response = await axiosJWT.get(`${USER_API}/doctors`);
+        console.log('🛠️ Get approved doctors response: ', response)
         // Filter doctors with status approved
         const approvedDoctors = response.data.doctors.filter(
           (doctor: { status: string }) => doctor.status === "approved"
