@@ -59,7 +59,7 @@ const userRoutes = () => {
   router.post("/reset-password/:token", controller.resetPassword);
 
   router.get("/profile", authenticateUser, controller.userProfile);
-  router.get("/doctors", authenticateUser, controller.doctorPage);
+  router.get("/doctors", controller.doctorPage);
   router.get("/time-slots", authenticateUser, controller.getAllTimeSlots);
   router.get("/doctor/:id", authenticateUser, controller.doctorDetails);
   router.patch("/profile/edit", authenticateUser, controller.updateUserInfo);

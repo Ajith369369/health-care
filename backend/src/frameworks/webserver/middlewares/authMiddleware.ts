@@ -21,10 +21,12 @@ export function authenticateUser(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): void {
+  console.log('🛠️ User Auth Header from Frontend: ', req.headers.authorization)
   const access_token = req.headers.authorization;
   if (!access_token) {
-    return res.status(HttpStatus.FORBIDDEN).json("Your are not authenticated");
+    res.status(HttpStatus.FORBIDDEN).json("Your are not authenticated");
+    return;
   }
 
   // Extract the token from the header (assuming it's in the format "Bearer <token>")
@@ -32,7 +34,8 @@ export function authenticateUser(
   const token = tokenParts.length === 2 ? tokenParts[1] : null;
 
   if (!token) {
-    return res.status(HttpStatus.FORBIDDEN).json("Invalid access token format");
+    res.status(HttpStatus.FORBIDDEN).json("Invalid access token format");
+    return;
   }
 
   jwt.verify(token, configKeys.ACCESS_SECRET, (err: any, user: any) => {
@@ -40,6 +43,7 @@ export function authenticateUser(
       res
         .status(HttpStatus.FORBIDDEN)
         .json({ success: false, message: "Token is not valid" });
+      return;
     } else {
       req.user = user.id;
       next();
