@@ -16,7 +16,7 @@ export const authService = () => {
 
   const getRandomString = () => crypto.randomUUID();
 
-  //generate otp
+  //generate OTP
   const generateOTP = () => {
     const otp = Math.floor(100000 + Math.random() * 900000);
     return `${otp}`;

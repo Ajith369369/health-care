@@ -74,7 +74,7 @@ const userController = (
     res: Response,
     next: NextFunction
   ) => {
-    console.log('🛠️ Inside registerUser controller.')
+    console.log("🛠️ Inside registerUser controller.");
     try {
       const user = req.body;
       const { createdUser, accessToken } = await userRegister(
@@ -114,7 +114,7 @@ const userController = (
     try {
       const { userId } = req.body;
       await deleteOtp(userId, dbRepositoryUser, authService);
-      res.json({ message: "New otp sent to mail" });
+      res.json({ message: "New OTP sent to mail" });
     } catch (error) {
       next(error);
     }
