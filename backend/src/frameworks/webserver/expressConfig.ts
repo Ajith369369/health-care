@@ -10,6 +10,7 @@ const expressConfig = (app: Application) => {
   app.use(morgan("dev"));
   const corsConfig = {
     origin: configKeys.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   };
 

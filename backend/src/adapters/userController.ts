@@ -83,7 +83,7 @@ const userController = (
         authService
       );
       res.json({
-        message: "User registration successful,please verify email",
+        message: "User registration successful, please verify email.",
         newUser: createdUser,
         accessToken: accessToken,
       });

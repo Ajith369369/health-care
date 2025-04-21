@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
+import axiosJWT from "../../services/axiosService";
 import { setItemToLocalStorage } from "../../utils/set&Get";
 import showToast from "../../utils/toast";
 import { validateUserSignup } from "../../utils/validationSignup";
@@ -23,8 +23,8 @@ const Register: React.FC = () => {
       setIsSubmitting(true);
       try {
         const { name, email, password } = values;
-        console.log('🛠️ USER_API: ', USER_API)
-        const { data } = await axios.post(USER_API + "/register", {
+        console.log("🛠️ USER_API: ", USER_API);
+        const { data } = await axiosJWT.post(USER_API + "/register", {
           name,
           email,
           password,
@@ -35,7 +35,7 @@ const Register: React.FC = () => {
         setItemToLocalStorage("userId", newUser._id);
         navigate("/user/verify-otp");
       } catch (error: any) {
-        console.log(error);
+        console.log("🛠️ Register API error: ", error);
         // const { message } = error.response.data;
         const message =
           error?.response?.data?.message ||
