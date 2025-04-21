@@ -22,6 +22,10 @@ import { authenticateUser } from "../middlewares/authMiddleware";
 const userRoutes = () => {
   const router = express.Router();
 
+  /**
+   * 📄 Documentation: ../../../../docs/userController.md
+   */
+
   const controller: any = userController(
     authServiceInterface,
     authService,

@@ -47,7 +47,7 @@ socketConfig(io);
 expressConfig(app);
 
 // 🔧 CORS headers middleware
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", configKeys.FRONTEND_URL);
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -60,7 +60,7 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
   next(); // ✅ Allow actual requests to proceed
-});
+}); */
 
 connectDB();
 routes(app);

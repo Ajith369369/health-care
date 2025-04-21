@@ -1,5 +1,5 @@
 export const BACKEND_URL: string = import.meta.env.VITE_BACKEND_URL;
-console.log("🛠️ BACKEND_URL:", BACKEND_URL);
+// console.log("🛠️ BACKEND_URL:", BACKEND_URL);
 export const GOOGLE_CLIENT_ID: string = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 export const USER_API: string = `${BACKEND_URL}/user`;
 export const DOCTOR_API: string = `${BACKEND_URL}/doctor`;

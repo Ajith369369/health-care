@@ -18,10 +18,19 @@ const getAccessToken = async () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+
+    console.log("🛠️ Headers: ", headers);
+    console.log("🛠️ TOKEN_API: ", TOKEN_API);
+
     const { data } = await axios.get(`${TOKEN_API}/access-token`, { headers });
+    console.log("🛠️ { data }: ", data);
 
     const decodedToken: Payload = await jwtDecode(token);
+    console.log('🛠️ decodedToken: ', decodedToken)
+
     const { role } = decodedToken;
+    console.log('🛠️ { role }: ', { role })
+
     if (role === "doctor" || role === "user") {
       const { user } = data;
       if (user && user.isBlocked) {
@@ -29,6 +38,8 @@ const getAccessToken = async () => {
         return null;
       }
     }
+
+    console.log('🛠️ token: ', token)
     return token;
   } catch (error) {
     console.log(error, "Error in getting token");
@@ -39,8 +50,11 @@ const getAccessToken = async () => {
 axiosJWT.interceptors.request.use(async (config) => {
   try {
     const accessToken = await getAccessToken();
+    console.log('🛠️ accessToken: ', accessToken)
+
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
+      console.log('🛠️ config.headers.Authorization: ', config.headers.Authorization)
     }
   } catch (error) {
     console.log("Error in adding token to request:", error);

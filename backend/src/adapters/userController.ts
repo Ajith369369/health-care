@@ -74,6 +74,7 @@ const userController = (
     res: Response,
     next: NextFunction
   ) => {
+    console.log('🛠️ Inside registerUser controller.')
     try {
       const user = req.body;
       const { createdUser, accessToken } = await userRegister(

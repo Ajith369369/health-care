@@ -9,8 +9,10 @@ export const useSocket = () => useContext(SocketContext);
 
 const SocketProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const socket = io(BACKEND_URL, {
-    withCredentials: true,});
-  socket.on("connect", () => console.log("connected"));
+    withCredentials: true,
+    transports: ["websocket"], // Add this to avoid polling issues
+    });
+  socket.on("connect", () => console.log("✅ Connected to socket:", socket.id));
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
