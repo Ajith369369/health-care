@@ -27,7 +27,7 @@ export const userRegister = async (
 
   const isEmailExist = await userRepository.getUserbyEmail(email);
   if (isEmailExist)
-    throw new CustomError("Email already exists", HttpStatus.BAD_REQUEST);
+    throw new CustomError("Email already exists.", HttpStatus.BAD_REQUEST);
 
   const hashedPassword: string = await authService.encryptPassword(password);
 
@@ -40,11 +40,18 @@ export const userRegister = async (
 
   //create a new User
   const createdUser: UserInterface = await userRepository.addUser(userEntity);
+  console.log('🛠️ createdUser: ', createdUser)
+  console.log('🛠️ createdUser.name: ', createdUser.name)
+  console.log('🛠️ createdUser.email: ', createdUser.email)
 
   const wallet = await userRepository.addWallet(createdUser.id);
 
   const OTP = authService.generateOTP(); //generate OTP
+  console.log('🛠️ OTP: ', OTP)
+
   const emailSubject = "Account verification";
+  console.log('🛠️ emailSubject: ', emailSubject)
+
   sentMail(createdUser.email, emailSubject, otpEmail(OTP, createdUser.name)); //send OTP
   await userRepository.addOTP(OTP, createdUser.id);
 

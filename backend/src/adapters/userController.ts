@@ -114,7 +114,7 @@ const userController = (
     try {
       const { userId } = req.body;
       await deleteOtp(userId, dbRepositoryUser, authService);
-      res.json({ message: "New OTP sent to mail" });
+      res.json({ message: "New OTP sent to mail." });
     } catch (error) {
       next(error);
     }

@@ -1,14 +1,14 @@
 import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import axiosJWT from "../../services/axiosService";
 import { useFormik } from "formik";
 import { jwtDecode } from "jwt-decode";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
-import { setUser } from "../../features/users/UserSlice";
 import { useAppDispatch } from "../../features/store/store";
+import { setUser } from "../../features/users/UserSlice";
 import showToast from "../../utils/toast";
-import validateLogin  from "../../utils/validateLogin";
+import validateLogin from "../../utils/validateLogin";
 
 const Login: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     validate: validateLogin,
     onSubmit: ({ email, password }) => {
       setIsSubmitting(true);
-      axios
+      axiosJWT
         .post(USER_API + "/login", { email, password })
         .then(({ data }) => {
           const access_token = data.accessToken;

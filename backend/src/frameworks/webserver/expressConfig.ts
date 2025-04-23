@@ -11,7 +11,7 @@ const expressConfig = (app: Application) => {
   const corsConfig = {
     origin: configKeys.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    // credentials: true,
   };
 
   app.use(cors(corsConfig));
