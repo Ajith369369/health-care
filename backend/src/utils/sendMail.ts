@@ -7,7 +7,7 @@ const sentMail = async (
   // send mail with defined transport object
   try {
     const info = await transporter.sendMail({
-      from: '"HEALTH MATE" <healthmate000@gmail.com>',
+      from: '"HEALTH MATE" <healthcare000@gmail.com>',
       to: email,
       subject: emailSubject,
       html: content,

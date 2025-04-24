@@ -20,6 +20,7 @@ export const userRegister = async (
   userRepository: ReturnType<userDbInterface>,
   authService: ReturnType<AuthServiceInterfaceType>
 ) => {
+  console.log('🛠️ Inside userRegister().')
   const { name, email, password } = user;
   const authenticationMethod = "password";
 
