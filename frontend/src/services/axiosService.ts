@@ -1,51 +1,14 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { TOKEN_API } from "../Config";
-import { Payload } from "../types/propsType";
-import logout from "../utils/logout";
+import { BACKEND_URL } from "../Config";
+import { getAccessToken } from "./getAccessToken";
 
-const axiosJWT = axios.create();
-axiosJWT.defaults.withCredentials = true;
-
-const getAccessToken = async () => {
-  try {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      // Handle case when token doesn't exist in local storage
-      console.error("Access token not found in local storage");
-      return null;
-    }
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    console.log("🛠️ Headers: ", headers);
-    console.log("🛠️ TOKEN_API: ", TOKEN_API);
-
-    const { data } = await axios.get(`${TOKEN_API}/access-token`, { headers });
-    console.log("🛠️ { data }: ", data);
-
-    const decodedToken: Payload = await jwtDecode(token);
-    console.log('🛠️ decodedToken: ', decodedToken)
-
-    const { role } = decodedToken;
-    console.log('🛠️ { role }: ', { role })
-
-    if (role === "doctor" || role === "user") {
-      const { user } = data;
-      if (user && user.isBlocked) {
-        logout("Your account has been blocked by the administrator", "error");
-        return null;
-      }
-    }
-
-    console.log('🛠️ token: ', token)
-    return token;
-  } catch (error) {
-    console.log(error, "Error in getting token");
-    return null;
-  }
+const axiosConfig = {
+  baseURL: BACKEND_URL, // The base URL for the API
+  withCredentials: true, // Ensure cookies are sent with the request
 };
+
+const axiosJWT = axios.create(axiosConfig);
+axiosJWT.defaults.withCredentials = true;
 
 axiosJWT.interceptors.request.use(async (config) => {
   try {

@@ -82,6 +82,7 @@ const Login: React.FC = () => {
               <input
                 type="text"
                 id="email"
+                autoComplete="new-email"
                 className="w-full mt-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 {...formik.getFieldProps("email")}
               />
@@ -101,6 +102,7 @@ const Login: React.FC = () => {
               <input
                 type="password"
                 id="password"
+                autoComplete="new-password"
                 className="w-full mt-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 {...formik.getFieldProps("password")}
               />

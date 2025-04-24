@@ -54,19 +54,19 @@
         # npm-install = "npm install";
         # The '' (double single quotes) let you write multi-line shell commands
         # &: Start your backend using npm run dev and run it in background, so other tasks (like starting the frontend or initializing other services) can proceed without waiting.
-        start-backend = ''
-          cd backend
-          npm run dev &
-        '';
+        # start-backend = ''
+        #   cd backend
+        #   npm run dev &
+        # '';
       };
       # Runs when the workspace is (re)started
       onStart = {
         # Example: start a background task to watch and re-build backend code
         # watch-backend = "npm run watch-backend";
-        start-backend = ''
-          cd backend
-          npm run dev &
-        '';
+        # start-backend = ''
+        #   cd backend
+        #   npm run dev &
+        # '';
       };
     };
   };
