@@ -31,6 +31,7 @@ export const userRegister = async (
     throw new CustomError("Email already exists.", HttpStatus.BAD_REQUEST);
 
   const hashedPassword: string = await authService.encryptPassword(password);
+  console.log('🛠️ hashedPassword: ', hashedPassword)
 
   const userEntity: userEntityType = createUserEntity(
     name,
