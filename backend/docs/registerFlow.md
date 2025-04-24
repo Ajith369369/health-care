@@ -1,6 +1,6 @@
 frameworks > adapters > app > frameworks > app (userDbRepository.ts) > 
 
-📥 Register.tsx
+📥 Register User API
 ├── 📝 userRoutes.ts (/src/frameworks/webserver/routes)
 │   └── 🛠️ router.post("/register", controller.registerUser);
 ├── 📝 userController.ts (/src/adapters)
