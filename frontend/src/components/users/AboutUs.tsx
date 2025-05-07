@@ -14,7 +14,7 @@ const AboutUs: React.FC = () => {
             />
           </div>
           <div className="md:w-1/2 md:pl-8">
-            <h2 className="text-2xl font-bold mb-4">Welcome to Health Mate</h2>
+            <h2 className="text-2xl font-bold mb-4">Welcome to Health Care</h2>
             <ul className="list-disc text-lg mb-4 ml-6">
               <li>Best Care for Your Good Health</li>
               <li>A Passion for Healing</li>
@@ -25,7 +25,7 @@ const AboutUs: React.FC = () => {
               <li>A Legacy of Excellence</li>
             </ul>
             <p className="text-lg mb-4">
-              At Health Mate, we are dedicated to providing exceptional
+              At Health Care, we are dedicated to providing exceptional
               healthcare services. Our team is committed to delivering the
               highest standard of care with compassion and expertise. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit. Quisque

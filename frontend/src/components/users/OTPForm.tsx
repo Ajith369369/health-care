@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useFormik } from "formik";
+import axiosJWT from "../../services/axiosService";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
@@ -27,7 +28,7 @@ const OTPForm: React.FC = () => {
     onSubmit: ({ otp }) => {
       const userId = getItemFromLocalStorage("userId");
       if (userId) {
-        axios
+        axiosJWT
           .post(USER_API + "/verify-otp", { otp, userId })
           .then(({ data }) => {
             showToast(data.message, "success");

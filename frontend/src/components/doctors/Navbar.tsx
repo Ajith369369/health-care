@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
                 to="/"
                 className="text-white font-bold text-xl ml-2 md:ml-20"
               >
-                HEALTH MATE
+                HEALTH CARE
               </Link>
             </div>
             {/* Mobile menu button */}

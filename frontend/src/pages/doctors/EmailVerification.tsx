@@ -31,7 +31,7 @@ const EmailVerification: React.FC = () => {
             </h1>
             <p className="text-lg mb-6 text-center text-gray-700">
               Your email has been successfully verified. You can now start using
-              Health Mate .
+              Health Care .
             </p>
             <button
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

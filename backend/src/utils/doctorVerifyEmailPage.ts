@@ -1,3 +1,5 @@
+import { configKeys } from "../config";
+
 export const doctorVerifyEmailPage = (name: string, token: string) => {
     return `<!DOCTYPE html>
       <html lang="en">
@@ -72,14 +74,14 @@ export const doctorVerifyEmailPage = (name: string, token: string) => {
       <body>
       
         <div class="container">
-          <h1>Welcome to Health Mate</h1>
+          <h1>Welcome to Health Care</h1>
           <p>Dear ${name},</p>
-          <p>We are thrilled to have you join our platform. Your are now part of the Health Mate family</p>
+          <p>We are thrilled to have you join our platform. Your are now part of the Health Care family</p>
           <p>To get started, please confirm your email address by clicking the button below:</p>
-          <a href=https://dpsdev.site/doctor/verify_token/${token} class="button" target="_blank">Confirm Email</a>
-          <p>If you didn't sign up for an account on Health Mate, you can disregard this email.</p>
+          <a href=${configKeys.BACKEND_URL}/doctor/verify-token/${token} class="button" target="_blank">Confirm Email</a>
+          <p>If you didn't sign up for an account on Health Care, you can disregard this email.</p>
           <div class="footer">
-            <p>Best regards,<br>Health Mate Team</p>
+            <p>Best regards,<br>Health Care Team</p>
             <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
           </div>
         </div>    

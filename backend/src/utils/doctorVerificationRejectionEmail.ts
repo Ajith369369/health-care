@@ -66,7 +66,7 @@ export const doctorVerificationRejectedEmailPage = (name: string, reason: string
           <p class="reason">${reason}</p>
           <p>If you have any questions or concerns, please feel free to contact us.</p>
           <div class="footer">
-            <p>Best regards,<br>Health Mate Team</p>
+            <p>Best regards,<br>Health Care Team</p>
             <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
           </div>
         </div>    

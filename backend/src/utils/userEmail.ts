@@ -1,3 +1,5 @@
+import { configKeys } from "../config";
+
 export const otpEmail = (otp: string, name: string) => {
     return `
     <!DOCTYPE html>
@@ -44,14 +46,14 @@ export const otpEmail = (otp: string, name: string) => {
     <body>
       <div class="container">
         <div>
-          <a href="#" class="logo">Health Mate</a>
+          <a href="#" class="logo">Health Care</a>
         </div>
-        <p>Hi,${name}</p>
-        <p>Welcome to Health Mate. Use the following OTP to complete your Sign Up procedures. OTP is valid for 2 minutes</p>
+        <p>Hi, ${name}</p>
+        <p>Welcome to Health Care. Use the following OTP to complete the signup procedure. OTP is valid for 2 minutes.</p>
         <div class="otp-container">${otp}</div>
-        <p>Regards,<br />Health Mate</p>
+        <p>Regards,<br />Health Care</p>
         <div class="footer">
-          <p>Health Mate</p>
+          <p>Health Care</p>
           <p>Kochi, Ernakulam, Kerala</p>
           <p>India</p>
         </div>
@@ -85,7 +87,7 @@ export const otpEmail = (otp: string, name: string) => {
                                 <p>Dear ${name},</p>
                                 <p>We have received a request to reset your password. To reset your password, click the button below:</p>
                                 <p style="text-align: center;">
-                                    <a href="https://dpsdev.site/user/reset_password/${verificationCode}" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
+                                    <a href="${configKeys.BACKEND_URL}/user/reset-password/${verificationCode}" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
                                 </p>
                                 <p>If you didn't request a password reset, you can ignore this email. Your password will remain unchanged.</p>
                                 <p>Thank you for using our service!</p>

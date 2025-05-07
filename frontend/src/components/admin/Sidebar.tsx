@@ -5,7 +5,7 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div className="bg-gray-800 text-white w-64 py-4 px-6 h-full flex flex-col">
-        <h1 className="text-2xl font-bold mb-8">HEALTH MATE</h1>
+        <h1 className="text-2xl font-bold mb-8">HEALTH CARE</h1>
         <ul className="space-y-2">
           <li>
             <Link
