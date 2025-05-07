@@ -7,7 +7,7 @@ import { configKeys } from "../../config";
 const expressConfig = (app: Application) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(morgan("dev"));
+  app.use(morgan("combined"));
   const allowedOrigins = [
     "http://localhost:5173", // Your Vite dev URL
     configKeys.FRONTEND_URL, // Your production frontend URL

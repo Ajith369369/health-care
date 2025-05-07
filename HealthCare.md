@@ -2,6 +2,10 @@ https://github.com/Ajith369369/health-care.git
 
 # **🔹 Full Folder Structure** │ ├── └──
 
+📦 health-care/                         
+│── 📂 backend/
+└── 📂 frontend/  
+
 📦 health-care/
 ├── 📂 .github/                           # ✅ CI/CD workflows
 │── 📂 backend/                           # 🎨 Backend (TypeScript + Express + MongoDB)

@@ -1,4 +1,6 @@
 import transporter from "../frameworks/services/mailService";
+import { configKeys } from "../config";
+
 const sentMail = async (
   email: string,
   emailSubject: string,
@@ -7,7 +9,7 @@ const sentMail = async (
   // send mail with defined transport object
   try {
     const info = await transporter.sendMail({
-      from: '"HEALTH MATE" <healthcare000@gmail.com>',
+      from: '"HEALTH CARE" <${configKeys.APP_EMAIL}>',
       to: email,
       subject: emailSubject,
       html: content,
@@ -18,4 +20,5 @@ const sentMail = async (
     console.log("Error in sending mail:", error);
   }
 };
+
 export default sentMail;

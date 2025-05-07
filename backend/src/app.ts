@@ -16,20 +16,20 @@ import CustomError from "./utils/customError";
 const app: Application = express();
 
 // 🔍 Log all the incoming request headers.
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   console.log("📥 Incoming Request Headers:", req.headers);
   next();
-});
+}); */
 
 // 🔍 Log all the outgoing response headers.
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   const originalSend = res.send;
   res.send = function (body) {
     console.log("📤 Outgoing Response Headers:", res.getHeaders());
     return originalSend.call(this, body);
   };
   next();
-});
+}); */
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
