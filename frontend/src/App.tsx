@@ -7,6 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import SocketProvider from "./context/SocketContext";
 import store, { persistor } from "./features/store/store";
 import MainRouter from "./routes/MainRouter";
+import { GOOGLE_CLIENT_ID } from "../src/Config";
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
       <StrictMode>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <GoogleOAuthProvider clientId="GOOGLE_CLIENT_ID">
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <BrowserRouter>
                 <SocketProvider>
                   <MainRouter />

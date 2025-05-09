@@ -47,6 +47,15 @@ socketConfig(io);
 expressConfig(app);
 
 // 🔧 CORS headers middleware
+
+/* app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+  // Optional if using COOP/COEP
+  next();
+}); */
+
 /* app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", configKeys.FRONTEND_URL);
   res.header("Access-Control-Allow-Credentials", "true");

@@ -45,7 +45,7 @@ const Login: React.FC = () => {
     picture: string;
     email_verified: boolean;
   }) => {
-    axios
+    axiosJWT
       .post(USER_API + "/google-sign-in", { user })
       .then(({ data }) => {
         const { message, user, accessToken } = data;
