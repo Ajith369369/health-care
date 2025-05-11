@@ -44,7 +44,8 @@ const Login: React.FC = () => {
     email: string;
     picture: string;
     email_verified: boolean;
-  }) => {
+  },
+) => {
     axiosJWT
       .post(USER_API + "/google-sign-in", { user })
       .then(({ data }) => {

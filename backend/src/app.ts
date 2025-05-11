@@ -12,8 +12,18 @@ import routes from "./frameworks/webserver/routes";
 import startServer from "./frameworks/webserver/server";
 import socketConfig from "./frameworks/webserver/webSocket/socket";
 import CustomError from "./utils/customError";
+import helmet from "helmet";
 
 const app: Application = express();
+
+// ✅ Add Helmet middleware early in the stack
+app.use(
+  helmet({
+    crossOriginOpenerPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 
 // 🔍 Log all the incoming request headers.
 /* app.use((req, res, next) => {
@@ -22,14 +32,14 @@ const app: Application = express();
 }); */
 
 // 🔍 Log all the outgoing response headers.
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   const originalSend = res.send;
   res.send = function (body) {
     console.log("📤 Outgoing Response Headers:", res.getHeaders());
     return originalSend.call(this, body);
   };
   next();
-}); */
+});
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
