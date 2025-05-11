@@ -1,14 +1,13 @@
-import { GoogleLogin } from "@react-oauth/google";
 import axiosJWT from "../../services/axiosService";
 import { useFormik } from "formik";
-import { jwtDecode } from "jwt-decode";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
 import { useAppDispatch } from "../../features/store/store";
 import { setUser } from "../../features/users/UserSlice";
 import showToast from "../../utils/toast";
 import validateLogin from "../../utils/validateLogin";
+import { GOOGLE_CLIENT_ID } from "../../Config";
 
 const Login: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -38,8 +37,9 @@ const Login: React.FC = () => {
         });
     },
   });
+  const googleButtonRef = useRef<HTMLDivElement>(null);
 
-  const handleGoogleSignIn = (user: {
+  /* const handleGoogleSignIn = (user: {
     name: string;
     email: string;
     picture: string;
@@ -63,7 +63,34 @@ const Login: React.FC = () => {
         navigate("/");
       })
       .catch(({ response }) => showToast(response.data.message, "error"));
-  };
+  }; */
+
+  useEffect(() => {
+    const clientId = GOOGLE_CLIENT_ID;
+    const redirectUri = `${window.location.origin}/`;
+
+    // Avoid re-initialization
+    if (window.google?.accounts?.id && !window.__GSI_INITIALIZED__) {
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+        ux_mode: "redirect",
+        login_uri: redirectUri,
+      });
+
+      window.__GSI_INITIALIZED__ = true; // prevent multiple calls
+    }
+
+    // Render the redirect button
+    if (window.google?.accounts?.id && googleButtonRef.current) {
+      window.google.accounts.id.renderButton(googleButtonRef.current, {
+        theme: "outline",
+        size: "large",
+      });
+    }
+
+    // ⚠️ Don't call prompt() in redirect mode, or only call it if you *don't* render the button
+  }, []);
+
 
   return (
     <>
@@ -141,21 +168,7 @@ const Login: React.FC = () => {
               Create Account
             </Link>
           </p>
-          <div className="flex justify-center mt-4">
-            <GoogleLogin
-              onSuccess={(credentialResponse: any) => {
-                const data: {
-                  name: string;
-                  email: string;
-                  picture: string;
-                  email_verified: boolean;
-                } = jwtDecode(credentialResponse?.credential);
-                handleGoogleSignIn(data);
-              }}
-              onError={() => {
-                showToast("Login Failed", "error");
-              }}
-            />
+          <div ref={googleButtonRef} className="flex justify-center mt-4">
           </div>
         </div>
       </div>
