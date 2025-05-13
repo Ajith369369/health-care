@@ -7,7 +7,10 @@ import { useAppDispatch } from "../../features/store/store";
 import { setUser } from "../../features/users/UserSlice";
 import showToast from "../../utils/toast";
 import validateLogin from "../../utils/validateLogin";
-import { GOOGLE_CLIENT_ID } from "../../Config";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+/* import { GOOGLE_CLIENT_ID } from "../../Config";
+import { GoogleLogin } from "@react-oauth/google"; */
 
 const Login: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -37,9 +40,16 @@ const Login: React.FC = () => {
         });
     },
   });
-  const googleButtonRef = useRef<HTMLDivElement>(null);
+/*   const googleButtonRef = useRef<HTMLDivElement>(null);
+  const clientId = GOOGLE_CLIENT_ID;
+  const redirectUri = `${window.location.origin}/`;
 
-  /* const handleGoogleSignIn = (user: {
+  const handleLogin = () => {
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=openid%20profile%20email`;
+    window.location.href = googleAuthUrl;
+  }; */
+
+  const handleGoogleSignIn = (user: {
     name: string;
     email: string;
     picture: string;
@@ -63,12 +73,9 @@ const Login: React.FC = () => {
         navigate("/");
       })
       .catch(({ response }) => showToast(response.data.message, "error"));
-  }; */
+  };
 
-  useEffect(() => {
-    const clientId = GOOGLE_CLIENT_ID;
-    const redirectUri = `${window.location.origin}/`;
-
+  /* useEffect(() => {
     // Avoid re-initialization
     if (window.google?.accounts?.id && !window.__GSI_INITIALIZED__) {
       window.google.accounts.id.initialize({
@@ -89,7 +96,7 @@ const Login: React.FC = () => {
     }
 
     // ⚠️ Don't call prompt() in redirect mode, or only call it if you *don't* render the button
-  }, []);
+  }, []); */
 
 
   return (
@@ -168,7 +175,22 @@ const Login: React.FC = () => {
               Create Account
             </Link>
           </p>
-          <div ref={googleButtonRef} className="flex justify-center mt-4">
+          {/* <div ref={googleButtonRef} className="flex justify-center mt-4"> */}
+          <div className="flex justify-center mt-4">
+          <GoogleLogin
+            onSuccess={(credentialResponse: any) => {
+              const data: {
+                name: string;
+                email: string;
+                picture: string;
+                email_verified: boolean;
+              } = jwtDecode(credentialResponse?.credential);
+              handleGoogleSignIn(data);
+            }}
+            onError={() => {
+              showToast("Login Failed", "error");
+            }}
+          />
           </div>
         </div>
       </div>

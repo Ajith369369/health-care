@@ -8,13 +8,13 @@ import SocketProvider from "./context/SocketContext";
 import store, { persistor } from "./features/store/store";
 import MainRouter from "./routes/MainRouter";
 import { GOOGLE_CLIENT_ID } from "../src/Config";
-import { jwtDecode } from "jwt-decode";
+/* import { jwtDecode } from "jwt-decode";
 import axiosJWT from "../src/services/axiosService";
 import { USER_API } from "../src/Config";
 import showToast from "../src/utils/toast";
-import { setUser } from "../src/features/users/UserSlice";
+import { setUser } from "../src/features/users/UserSlice"; */
 
-const GoogleAuthHandler: React.FC = () => {
+/* const GoogleAuthHandler: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ const GoogleAuthHandler: React.FC = () => {
   }, [dispatch, navigate]);
 
   return null;
-};
+}; */
 
 const App: React.FC = () => {
   return (
