@@ -1,14 +1,14 @@
-import axiosJWT from "../../services/axiosService";
+import { GoogleLogin } from "@react-oauth/google";
 import { useFormik } from "formik";
-import React, { useEffect, useRef, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { USER_API } from "../../Config";
 import { useAppDispatch } from "../../features/store/store";
 import { setUser } from "../../features/users/UserSlice";
+import axiosJWT from "../../services/axiosService";
 import showToast from "../../utils/toast";
 import validateLogin from "../../utils/validateLogin";
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
 /* import { GOOGLE_CLIENT_ID } from "../../Config";
 import { GoogleLogin } from "@react-oauth/google"; */
 
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
         });
     },
   });
-/*   const googleButtonRef = useRef<HTMLDivElement>(null);
+  /*   const googleButtonRef = useRef<HTMLDivElement>(null);
   const clientId = GOOGLE_CLIENT_ID;
   const redirectUri = `${window.location.origin}/`;
 
@@ -54,8 +54,7 @@ const Login: React.FC = () => {
     email: string;
     picture: string;
     email_verified: boolean;
-  },
-) => {
+  }) => {
     axiosJWT
       .post(USER_API + "/google-sign-in", { user })
       .then(({ data }) => {
@@ -70,7 +69,8 @@ const Login: React.FC = () => {
             id: user._id,
           })
         );
-        navigate("/");
+        console.log("🛠 Redirecting to... /");
+        navigate("/", { replace: true });
       })
       .catch(({ response }) => showToast(response.data.message, "error"));
   };
@@ -97,7 +97,6 @@ const Login: React.FC = () => {
 
     // ⚠️ Don't call prompt() in redirect mode, or only call it if you *don't* render the button
   }, []); */
-
 
   return (
     <>
@@ -177,20 +176,20 @@ const Login: React.FC = () => {
           </p>
           {/* <div ref={googleButtonRef} className="flex justify-center mt-4"> */}
           <div className="flex justify-center mt-4">
-          <GoogleLogin
-            onSuccess={(credentialResponse: any) => {
-              const data: {
-                name: string;
-                email: string;
-                picture: string;
-                email_verified: boolean;
-              } = jwtDecode(credentialResponse?.credential);
-              handleGoogleSignIn(data);
-            }}
-            onError={() => {
-              showToast("Login Failed", "error");
-            }}
-          />
+            <GoogleLogin
+              onSuccess={(credentialResponse: any) => {
+                const data: {
+                  name: string;
+                  email: string;
+                  picture: string;
+                  email_verified: boolean;
+                } = jwtDecode(credentialResponse?.credential);
+                handleGoogleSignIn(data);
+              }}
+              onError={() => {
+                showToast("Login Failed", "error");
+              }}
+            />
           </div>
         </div>
       </div>

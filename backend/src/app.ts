@@ -1,6 +1,7 @@
 console.log(`🔄 Loading file: ${__filename}`);
 
 import express, { Application, NextFunction, Request, Response } from "express";
+import helmet from "helmet";
 import { createServer } from "http";
 import path from "path";
 import { Server } from "socket.io";
@@ -12,18 +13,19 @@ import routes from "./frameworks/webserver/routes";
 import startServer from "./frameworks/webserver/server";
 import socketConfig from "./frameworks/webserver/webSocket/socket";
 import CustomError from "./utils/customError";
-import helmet from "helmet";
 
 const app: Application = express();
 
 // ✅ Add Helmet middleware early in the stack
-app.use(
+/* app.use(
   helmet({
-    crossOriginOpenerPolicy: false,
+    crossOriginOpenerPolicy: {
+      policy: "same-origin-allow-popups",
+    },
     crossOriginEmbedderPolicy: false,
     crossOriginResourcePolicy: { policy: "cross-origin" },
   })
-);
+); */
 
 // 🔍 Log all the incoming request headers.
 /* app.use((req, res, next) => {
