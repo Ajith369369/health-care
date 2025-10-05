@@ -2,6 +2,7 @@ https://github.com/Ajith369369/health-care.git
 
 # **🔹 Full Folder Structure** │ ├── └──
 
+```
 📦 health-care/                         
 │── 📂 backend/
 └── 📂 frontend/  
@@ -138,4 +139,4 @@ https://github.com/Ajith369369/health-care.git
 │   └── 📂 lib/                          # ✅ Common utilities
 │── 📄 docker-compose.yml                # ✅ Docker compose for orchestration
 └── 📄 README.md                         # ✅ Project documentation
-
+```
